@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jimy
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdUser", query = "SELECT u FROM Usuario u WHERE u.idUser = :idUser")
-    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
-    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
-    , @NamedQuery(name = "Usuario.findByIsAdmin", query = "SELECT u FROM Usuario u WHERE u.isAdmin = :isAdmin")
-    , @NamedQuery(name = "Usuario.findByStatus", query = "SELECT u FROM Usuario u WHERE u.status = :status")})
-public class Usuario implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findByIdUser", query = "SELECT u FROM User u WHERE u.idUser = :idUser")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByIsAdmin", query = "SELECT u FROM User u WHERE u.isAdmin = :isAdmin")
+    , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,14 +58,14 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY)
     private List<ContentCreator> contentCreatorList;
 
-    public Usuario() {
+    public User() {
     }
 
-    public Usuario(Long idUser) {
+    public User(Long idUser) {
         this.idUser = idUser;
     }
 
-    public Usuario(Long idUser, String email, String password, boolean isAdmin, short status) {
+    public User(Long idUser, String email, String password, boolean isAdmin, short status) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
@@ -132,10 +132,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        User other = (User) object;
         if ((this.idUser == null && other.idUser != null) || (this.idUser != null && !this.idUser.equals(other.idUser))) {
             return false;
         }
@@ -144,7 +144,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.Usuario[ idUser=" + idUser + " ]";
+        return "NoCountry.YouTech.entities.User[ idUser=" + idUser + " ]";
     }
     
 }

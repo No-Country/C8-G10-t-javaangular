@@ -70,7 +70,7 @@ public class ContentCreator implements Serializable {
     private List<BroadcastMedium> broadcastMediumList;
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Usuario idUser;
+    private User idUser;
 
     public ContentCreator() {
     }
@@ -151,19 +151,19 @@ public class ContentCreator implements Serializable {
     }
 
     @XmlTransient
-    public List<BroadcastMedium> getBroacastMediumList() {
+    public List<BroadcastMedium> getBroadcastMediumList() {
         return broadcastMediumList;
     }
 
-    public void setBroacastMediumList(List<BroadcastMedium> broadcastMediumList) {
+    public void setBroadcastMediumList(List<BroadcastMedium> broadcastMediumList) {
         this.broadcastMediumList = broadcastMediumList;
     }
 
-    public Usuario getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Usuario idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 

@@ -89,11 +89,11 @@ public class BroadcastType implements Serializable {
     }
 
     @XmlTransient
-    public List<BroadcastMedium> getBroacastMediumList() {
+    public List<BroadcastMedium> getBroadcastMediumList() {
         return broadcastMediumList;
     }
 
-    public void setBroacastMediumList(List<BroadcastMedium> broadcastMediumList) {
+    public void setBroadcastMediumList(List<BroadcastMedium> broadcastMediumList) {
         this.broadcastMediumList = broadcastMediumList;
     }
 

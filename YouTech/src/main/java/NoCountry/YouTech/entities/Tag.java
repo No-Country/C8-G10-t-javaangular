@@ -89,11 +89,11 @@ public class Tag implements Serializable {
     }
 
     @XmlTransient
-    public List<BroadcastMediumTag> getBroacastMediumTagList() {
+    public List<BroadcastMediumTag> getBroadcastMediumTagList() {
         return broadcastMediumTagList;
     }
 
-    public void setBroacastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
+    public void setBroadcastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
         this.broadcastMediumTagList = broadcastMediumTagList;
     }
 

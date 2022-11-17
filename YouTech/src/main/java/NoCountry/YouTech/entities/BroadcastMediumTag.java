@@ -25,20 +25,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jimy
  */
 @Entity
-@Table(name = "broacast_medium_tag")
+@Table(name = "broadcast_medium_tag")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BroacastMediumTag.findAll", query = "SELECT b FROM BroacastMediumTag b")
-    , @NamedQuery(name = "BroacastMediumTag.findByIdBroacastMediumTag", query = "SELECT b FROM BroacastMediumTag b WHERE b.idBroacastMediumTag = :idBroacastMediumTag")})
+    @NamedQuery(name = "BroadcastMediumTag.findAll", query = "SELECT b FROM BroadcastMediumTag b")
+    , @NamedQuery(name = "BroadcastMediumTag.findByIdBroadcastMediumTag", query = "SELECT b FROM BroadcastMediumTag b WHERE b.idBroadcastMediumTag = :idBroadcastMediumTag")})
 public class BroadcastMediumTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_broacast_medium_tag")
-    private Long idBroacastMediumTag;
-    @JoinColumn(name = "id_broadcast_medium", referencedColumnName = "id_broacast_medium")
+    @Column(name = "id_broadcast_medium_tag")
+    private Long idBroadcastMediumTag;
+    @JoinColumn(name = "id_broadcast_medium", referencedColumnName = "id_broadcast_medium")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private BroadcastMedium idBroadcastMedium;
     @JoinColumn(name = "id_tag", referencedColumnName = "id_tag")
@@ -48,16 +48,16 @@ public class BroadcastMediumTag implements Serializable {
     public BroadcastMediumTag() {
     }
 
-    public BroadcastMediumTag(Long idBroacastMediumTag) {
-        this.idBroacastMediumTag = idBroacastMediumTag;
+    public BroadcastMediumTag(Long idBroadcastMediumTag) {
+        this.idBroadcastMediumTag = idBroadcastMediumTag;
     }
 
-    public Long getIdBroacastMediumTag() {
-        return idBroacastMediumTag;
+    public Long getIdBroadcastMediumTag() {
+        return idBroadcastMediumTag;
     }
 
-    public void setIdBroacastMediumTag(Long idBroacastMediumTag) {
-        this.idBroacastMediumTag = idBroacastMediumTag;
+    public void setIdBroadcastMediumTag(Long idBroadcastMediumTag) {
+        this.idBroadcastMediumTag = idBroadcastMediumTag;
     }
 
     public BroadcastMedium getIdBroadcastMedium() {
@@ -79,7 +79,7 @@ public class BroadcastMediumTag implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idBroacastMediumTag != null ? idBroacastMediumTag.hashCode() : 0);
+        hash += (idBroadcastMediumTag != null ? idBroadcastMediumTag.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +90,7 @@ public class BroadcastMediumTag implements Serializable {
             return false;
         }
         BroadcastMediumTag other = (BroadcastMediumTag) object;
-        if ((this.idBroacastMediumTag == null && other.idBroacastMediumTag != null) || (this.idBroacastMediumTag != null && !this.idBroacastMediumTag.equals(other.idBroacastMediumTag))) {
+        if ((this.idBroadcastMediumTag == null && other.idBroadcastMediumTag != null) || (this.idBroadcastMediumTag != null && !this.idBroadcastMediumTag.equals(other.idBroadcastMediumTag))) {
             return false;
         }
         return true;
@@ -98,7 +98,7 @@ public class BroadcastMediumTag implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroacastMediumTag[ idBroacastMediumTag=" + idBroacastMediumTag + " ]";
+        return "NoCountry.YouTech.entities.BroadcastMediumTag[ idBroadcastMediumTag=" + idBroadcastMediumTag + " ]";
     }
     
 }

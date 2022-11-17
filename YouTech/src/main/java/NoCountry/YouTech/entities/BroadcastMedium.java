@@ -29,24 +29,24 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jimy
  */
 @Entity
-@Table(name = "broacast_medium")
+@Table(name = "broadcast_medium")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BroacastMedium.findAll", query = "SELECT b FROM BroacastMedium b")
-    , @NamedQuery(name = "BroacastMedium.findByIdBroacastMedium", query = "SELECT b FROM BroacastMedium b WHERE b.idBroacastMedium = :idBroacastMedium")
-    , @NamedQuery(name = "BroacastMedium.findByUrImage", query = "SELECT b FROM BroacastMedium b WHERE b.urImage = :urImage")
-    , @NamedQuery(name = "BroacastMedium.findByName", query = "SELECT b FROM BroacastMedium b WHERE b.name = :name")
-    , @NamedQuery(name = "BroacastMedium.findByDescription", query = "SELECT b FROM BroacastMedium b WHERE b.description = :description")
-    , @NamedQuery(name = "BroacastMedium.findByUrl", query = "SELECT b FROM BroacastMedium b WHERE b.url = :url")
-    , @NamedQuery(name = "BroacastMedium.findByStatus", query = "SELECT b FROM BroacastMedium b WHERE b.status = :status")})
+    @NamedQuery(name = "BroadcastMedium.findAll", query = "SELECT b FROM BroadcastMedium b")
+    , @NamedQuery(name = "BroadcastMedium.findByIdBroadcastMedium", query = "SELECT b FROM BroadcastMedium b WHERE b.idBroadcastMedium = :idBroadcastMedium")
+    , @NamedQuery(name = "BroadcastMedium.findByUrImage", query = "SELECT b FROM BroadcastMedium b WHERE b.urImage = :urImage")
+    , @NamedQuery(name = "BroadcastMedium.findByName", query = "SELECT b FROM BroadcastMedium b WHERE b.name = :name")
+    , @NamedQuery(name = "BroadcastMedium.findByDescription", query = "SELECT b FROM BroadcastMedium b WHERE b.description = :description")
+    , @NamedQuery(name = "BroadcastMedium.findByUrl", query = "SELECT b FROM BroadcastMedium b WHERE b.url = :url")
+    , @NamedQuery(name = "BroadcastMedium.findByStatus", query = "SELECT b FROM BroadcastMedium b WHERE b.status = :status")})
 public class BroadcastMedium implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_broacast_medium")
-    private Integer idBroacastMedium;
+    @Column(name = "id_broadcast_medium")
+    private Integer idBroadcastMedium;
     @Basic(optional = false)
     @Column(name = "ur_image")
     private String urImage;
@@ -72,23 +72,23 @@ public class BroadcastMedium implements Serializable {
     public BroadcastMedium() {
     }
 
-    public BroadcastMedium(Integer idBroacastMedium) {
-        this.idBroacastMedium = idBroacastMedium;
+    public BroadcastMedium(Integer idBroadcastMedium) {
+        this.idBroadcastMedium = idBroadcastMedium;
     }
 
-    public BroadcastMedium(Integer idBroacastMedium, String urImage, String name, String url) {
-        this.idBroacastMedium = idBroacastMedium;
+    public BroadcastMedium(Integer idBroadcastMedium, String urImage, String name, String url) {
+        this.idBroadcastMedium = idBroadcastMedium;
         this.urImage = urImage;
         this.name = name;
         this.url = url;
     }
 
-    public Integer getIdBroacastMedium() {
-        return idBroacastMedium;
+    public Integer getIdBroadcastMedium() {
+        return idBroadcastMedium;
     }
 
-    public void setIdBroacastMedium(Integer idBroacastMedium) {
-        this.idBroacastMedium = idBroacastMedium;
+    public void setIdBroadcastMedium(Integer idBroadcastMedium) {
+        this.idBroadcastMedium = idBroadcastMedium;
     }
 
     public String getUrImage() {
@@ -148,18 +148,18 @@ public class BroadcastMedium implements Serializable {
     }
 
     @XmlTransient
-    public List<BroadcastMediumTag> getBroacastMediumTagList() {
+    public List<BroadcastMediumTag> getBroadcastMediumTagList() {
         return broadcastMediumTagList;
     }
 
-    public void setBroacastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
+    public void setBroadcastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
         this.broadcastMediumTagList = broadcastMediumTagList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idBroacastMedium != null ? idBroacastMedium.hashCode() : 0);
+        hash += (idBroadcastMedium != null ? idBroadcastMedium.hashCode() : 0);
         return hash;
     }
 
@@ -170,7 +170,7 @@ public class BroadcastMedium implements Serializable {
             return false;
         }
         BroadcastMedium other = (BroadcastMedium) object;
-        if ((this.idBroacastMedium == null && other.idBroacastMedium != null) || (this.idBroacastMedium != null && !this.idBroacastMedium.equals(other.idBroacastMedium))) {
+        if ((this.idBroadcastMedium == null && other.idBroadcastMedium != null) || (this.idBroadcastMedium != null && !this.idBroadcastMedium.equals(other.idBroadcastMedium))) {
             return false;
         }
         return true;
@@ -178,7 +178,7 @@ public class BroadcastMedium implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroacastMedium[ idBroacastMedium=" + idBroacastMedium + " ]";
+        return "NoCountry.YouTech.entities.BroadcastMedium[ idBroadcastMedium=" + idBroadcastMedium + " ]";
     }
     
 }
