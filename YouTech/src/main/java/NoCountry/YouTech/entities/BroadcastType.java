@@ -49,7 +49,7 @@ public class BroadcastType implements Serializable {
     @Column(name = "status")
     private short status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBroadcastType", fetch = FetchType.LAZY)
-    private List<BroacastMedium> broacastMediumList;
+    private List<BroadcastMedium> broadcastMediumList;
 
     public BroadcastType() {
     }
@@ -89,12 +89,12 @@ public class BroadcastType implements Serializable {
     }
 
     @XmlTransient
-    public List<BroacastMedium> getBroacastMediumList() {
-        return broacastMediumList;
+    public List<BroadcastMedium> getBroacastMediumList() {
+        return broadcastMediumList;
     }
 
-    public void setBroacastMediumList(List<BroacastMedium> broacastMediumList) {
-        this.broacastMediumList = broacastMediumList;
+    public void setBroacastMediumList(List<BroadcastMedium> broadcastMediumList) {
+        this.broadcastMediumList = broadcastMediumList;
     }
 
     @Override

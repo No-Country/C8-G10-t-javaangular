@@ -5,8 +5,8 @@
     <class>NoCountry.YouTech.entities.Usuario</class>
     <class>NoCountry.YouTech.entities.ContentCreator</class>
     <class>NoCountry.YouTech.entities.BroadcastType</class>
-    <class>NoCountry.YouTech.entities.BroacastMedium</class>
-    <class>NoCountry.YouTech.entities.BroacastMediumTag</class>
+    <class>NoCountry.YouTech.entities.BroadcastMedium</class>
+    <class>NoCountry.YouTech.entities.BroadcastMediumTag</class>
     <class>NoCountry.YouTech.entities.Tag</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/MyTech?zeroDateTimeBehavior=convertToNull"/>

@@ -67,7 +67,7 @@ public class ContentCreator implements Serializable {
     @Column(name = "url_linkedin")
     private String urlLinkedin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idContentCreator", fetch = FetchType.LAZY)
-    private List<BroacastMedium> broacastMediumList;
+    private List<BroadcastMedium> broadcastMediumList;
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario idUser;
@@ -151,12 +151,12 @@ public class ContentCreator implements Serializable {
     }
 
     @XmlTransient
-    public List<BroacastMedium> getBroacastMediumList() {
-        return broacastMediumList;
+    public List<BroadcastMedium> getBroacastMediumList() {
+        return broadcastMediumList;
     }
 
-    public void setBroacastMediumList(List<BroacastMedium> broacastMediumList) {
-        this.broacastMediumList = broacastMediumList;
+    public void setBroacastMediumList(List<BroadcastMedium> broadcastMediumList) {
+        this.broadcastMediumList = broadcastMediumList;
     }
 
     public Usuario getIdUser() {

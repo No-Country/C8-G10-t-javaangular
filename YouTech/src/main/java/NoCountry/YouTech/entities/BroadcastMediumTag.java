@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "BroacastMediumTag.findAll", query = "SELECT b FROM BroacastMediumTag b")
     , @NamedQuery(name = "BroacastMediumTag.findByIdBroacastMediumTag", query = "SELECT b FROM BroacastMediumTag b WHERE b.idBroacastMediumTag = :idBroacastMediumTag")})
-public class BroacastMediumTag implements Serializable {
+public class BroadcastMediumTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,15 +40,15 @@ public class BroacastMediumTag implements Serializable {
     private Long idBroacastMediumTag;
     @JoinColumn(name = "id_broadcast_medium", referencedColumnName = "id_broacast_medium")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private BroacastMedium idBroadcastMedium;
+    private BroadcastMedium idBroadcastMedium;
     @JoinColumn(name = "id_tag", referencedColumnName = "id_tag")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tag idTag;
 
-    public BroacastMediumTag() {
+    public BroadcastMediumTag() {
     }
 
-    public BroacastMediumTag(Long idBroacastMediumTag) {
+    public BroadcastMediumTag(Long idBroacastMediumTag) {
         this.idBroacastMediumTag = idBroacastMediumTag;
     }
 
@@ -60,11 +60,11 @@ public class BroacastMediumTag implements Serializable {
         this.idBroacastMediumTag = idBroacastMediumTag;
     }
 
-    public BroacastMedium getIdBroadcastMedium() {
+    public BroadcastMedium getIdBroadcastMedium() {
         return idBroadcastMedium;
     }
 
-    public void setIdBroadcastMedium(BroacastMedium idBroadcastMedium) {
+    public void setIdBroadcastMedium(BroadcastMedium idBroadcastMedium) {
         this.idBroadcastMedium = idBroadcastMedium;
     }
 
@@ -86,10 +86,10 @@ public class BroacastMediumTag implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BroacastMediumTag)) {
+        if (!(object instanceof BroadcastMediumTag)) {
             return false;
         }
-        BroacastMediumTag other = (BroacastMediumTag) object;
+        BroadcastMediumTag other = (BroadcastMediumTag) object;
         if ((this.idBroacastMediumTag == null && other.idBroacastMediumTag != null) || (this.idBroacastMediumTag != null && !this.idBroacastMediumTag.equals(other.idBroacastMediumTag))) {
             return false;
         }

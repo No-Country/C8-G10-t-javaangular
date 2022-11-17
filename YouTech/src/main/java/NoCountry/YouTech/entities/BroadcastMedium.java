@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "BroacastMedium.findByDescription", query = "SELECT b FROM BroacastMedium b WHERE b.description = :description")
     , @NamedQuery(name = "BroacastMedium.findByUrl", query = "SELECT b FROM BroacastMedium b WHERE b.url = :url")
     , @NamedQuery(name = "BroacastMedium.findByStatus", query = "SELECT b FROM BroacastMedium b WHERE b.status = :status")})
-public class BroacastMedium implements Serializable {
+public class BroadcastMedium implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,16 +67,16 @@ public class BroacastMedium implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ContentCreator idContentCreator;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBroadcastMedium", fetch = FetchType.LAZY)
-    private List<BroacastMediumTag> broacastMediumTagList;
+    private List<BroadcastMediumTag> broadcastMediumTagList;
 
-    public BroacastMedium() {
+    public BroadcastMedium() {
     }
 
-    public BroacastMedium(Integer idBroacastMedium) {
+    public BroadcastMedium(Integer idBroacastMedium) {
         this.idBroacastMedium = idBroacastMedium;
     }
 
-    public BroacastMedium(Integer idBroacastMedium, String urImage, String name, String url) {
+    public BroadcastMedium(Integer idBroacastMedium, String urImage, String name, String url) {
         this.idBroacastMedium = idBroacastMedium;
         this.urImage = urImage;
         this.name = name;
@@ -148,12 +148,12 @@ public class BroacastMedium implements Serializable {
     }
 
     @XmlTransient
-    public List<BroacastMediumTag> getBroacastMediumTagList() {
-        return broacastMediumTagList;
+    public List<BroadcastMediumTag> getBroacastMediumTagList() {
+        return broadcastMediumTagList;
     }
 
-    public void setBroacastMediumTagList(List<BroacastMediumTag> broacastMediumTagList) {
-        this.broacastMediumTagList = broacastMediumTagList;
+    public void setBroacastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
+        this.broadcastMediumTagList = broadcastMediumTagList;
     }
 
     @Override
@@ -166,10 +166,10 @@ public class BroacastMedium implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BroacastMedium)) {
+        if (!(object instanceof BroadcastMedium)) {
             return false;
         }
-        BroacastMedium other = (BroacastMedium) object;
+        BroadcastMedium other = (BroadcastMedium) object;
         if ((this.idBroacastMedium == null && other.idBroacastMedium != null) || (this.idBroacastMedium != null && !this.idBroacastMedium.equals(other.idBroacastMedium))) {
             return false;
         }

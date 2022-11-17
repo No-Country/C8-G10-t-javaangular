@@ -49,7 +49,7 @@ public class Tag implements Serializable {
     @Column(name = "status")
     private short status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTag", fetch = FetchType.LAZY)
-    private List<BroacastMediumTag> broacastMediumTagList;
+    private List<BroadcastMediumTag> broadcastMediumTagList;
 
     public Tag() {
     }
@@ -89,12 +89,12 @@ public class Tag implements Serializable {
     }
 
     @XmlTransient
-    public List<BroacastMediumTag> getBroacastMediumTagList() {
-        return broacastMediumTagList;
+    public List<BroadcastMediumTag> getBroacastMediumTagList() {
+        return broadcastMediumTagList;
     }
 
-    public void setBroacastMediumTagList(List<BroacastMediumTag> broacastMediumTagList) {
-        this.broacastMediumTagList = broacastMediumTagList;
+    public void setBroacastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
+        this.broadcastMediumTagList = broadcastMediumTagList;
     }
 
     @Override
