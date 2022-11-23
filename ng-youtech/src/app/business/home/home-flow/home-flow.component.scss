@@ -1,0 +1,25 @@
+@use "../../../../assets/theme/colors.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  .filters {
+    display: flex;
+    gap: 3em;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    mat-hint {
+      font-size: 16px;
+    }
+  }
+
+  .actions {
+    &__button-clear {
+      margin-left: 1em;
+    }
+  }
+}

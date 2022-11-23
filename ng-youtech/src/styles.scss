@@ -35,4 +35,29 @@ body {
   *:before {
     box-sizing: border-box;
   }
+
+  // ***************************************CAMBIO DE ESTILOS PARA LOS INPUTS Y LOS CHIPS***************************************
+  .mat-form-field-empty.mat-form-field-label {
+    color: #00cccb;
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      background-color: #0a0a0a;
+      border-radius: 5px;
+    }
+  }
+
+  // CHIP
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-chip-remove {
+    opacity: 1;
+  }
+  // ***************************************
+
+  // ***************************************CAMBIO DE ESTILOS PARA LOS BUTTONS**************************************
+
+  .mat-stroked-button:not(.mat-button-disabled) {
+    border-color: colors.$primary-color;
+    color: white;
+  }
 }

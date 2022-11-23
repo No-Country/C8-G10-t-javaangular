@@ -1,1 +1,34 @@
 <h1>Realiza tu búsqueda</h1>
+<div class="container">
+  <section class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Ingresa el nombre de algun creador de contenido</mat-label>
+      <input matInput placeholder="Placeholder" />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="example-chip-list" appearance="outline">
+      <mat-label>Favorite Fruits</mat-label>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="primary" selected
+          >Angular
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+      <mat-hint>Puedes usar algunos de nuestras etiquetas</mat-hint>
+    </mat-form-field>
+  </section>
+
+  <section class="actions">
+    <button mat-flat-button color="primary">Buscar</button>
+    <button class="actions__button-clear" mat-stroked-button color="primary">
+      Limpiar búsqueda
+    </button>
+  </section>
+
+  <section>
+    <h1>Creadores de contenido</h1>
+  </section>
+</div>
