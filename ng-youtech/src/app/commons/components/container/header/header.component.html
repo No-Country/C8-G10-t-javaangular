@@ -1,0 +1,16 @@
+<header class="header">
+  <h1 class="header__title">You<span>Tech</span></h1>
+
+  <section class="actions">
+    <ng-container *ngIf="isLoggedIn; else default">
+      <app-avatar></app-avatar>
+      <span class="actions__message">Hola, Miguel Ángel Duran García</span>
+      <button mat-flat-button color="primary">Cerrar sesión</button>
+    </ng-container>
+
+    <ng-template #default>
+      <button mat-button color="primary">Regístrate</button>
+      <button mat-flat-button color="primary">Iniciar sesión</button>
+    </ng-template>
+  </section>
+</header>

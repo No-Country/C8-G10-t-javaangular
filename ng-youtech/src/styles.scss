@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "./assets/theme/dark-primary.scss" as theme;
+@use "./assets/theme//colors.scss" as colors;
 
 @include mat.core();
 
@@ -7,7 +8,7 @@ $ng-youtech-primary: mat.define-palette(theme.$dark-palette-primary);
 $ng-youtech-accent: mat.define-palette(theme.$dark-palette-accent);
 $ng-youtech-warn: mat.define-palette(mat.$pink-palette);
 
-$ng-youtech-theme: mat.define-light-theme(
+$ng-youtech-theme: mat.define-dark-theme(
   (
     color: (
       primary: $ng-youtech-primary,
@@ -26,4 +27,12 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: colors.$background-color;
+  color: white;
+
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+  }
 }

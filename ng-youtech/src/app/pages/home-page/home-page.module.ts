@@ -1,15 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HomeFlowModule } from '../../business/home/home-flow/home-flow.module';
 import { HomePageComponent } from './home-page.component';
 
-
-
 @NgModule({
-  declarations: [
-    HomePageComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [HomePageComponent],
+  imports: [HomeFlowModule],
 })
-export class HomePageModule { }
+export class HomePageModule {}
