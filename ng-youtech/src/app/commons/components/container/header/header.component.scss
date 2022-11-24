@@ -1,4 +1,9 @@
 @use "../../../../../assets/theme/colors.scss";
+
+::ng-deep .demo {
+  background-color: colors.$background-card-color;
+}
+
 .header {
   padding: 2em;
   display: flex;

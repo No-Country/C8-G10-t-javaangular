@@ -10,7 +10,13 @@
 
     <ng-template #default>
       <button mat-button color="primary">Regístrate</button>
-      <button mat-flat-button color="primary">Iniciar sesión</button>
+      <button mat-flat-button color="primary" [matMenuTriggerFor]="menu">
+        Iniciar sesión
+      </button>
+
+      <mat-menu #menu="matMenu" class="demo">
+        <app-login-flow></app-login-flow>
+      </mat-menu>
     </ng-template>
   </section>
 </header>
