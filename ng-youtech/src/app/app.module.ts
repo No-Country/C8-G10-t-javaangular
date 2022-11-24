@@ -6,10 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContainerModule } from './commons/components/container/container.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
-import { CardHomeCreatorContentComponent } from './commons/components/card-home-creator-content/card-home-creator-content.component';
 
 @NgModule({
-  declarations: [AppComponent, CardHomeCreatorContentComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
