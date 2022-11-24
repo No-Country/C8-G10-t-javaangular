@@ -38,12 +38,12 @@ body {
 
   // ***************************************CAMBIO DE ESTILOS PARA LOS INPUTS Y LOS CHIPS***************************************
   .mat-form-field-empty.mat-form-field-label {
-    color: #00cccb;
+    color: colors.$primary-color;
   }
 
   .mat-form-field-appearance-outline {
     .mat-form-field-outline {
-      background-color: #0a0a0a;
+      background-color: colors.$background-black-color;
       border-radius: 5px;
     }
   }

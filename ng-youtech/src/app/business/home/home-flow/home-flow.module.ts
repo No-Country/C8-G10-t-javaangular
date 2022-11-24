@@ -8,8 +8,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { CardHomeCreatorContentModule } from '../../../commons/components/card-home-creator-content/card-home-creator-content.module';
 import { HomeFlowComponent } from './home-flow.component';
-
 
 @NgModule({
   declarations: [HomeFlowComponent],
@@ -24,6 +24,7 @@ import { HomeFlowComponent } from './home-flow.component';
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
+    CardHomeCreatorContentModule,
   ],
   exports: [HomeFlowComponent],
 })
