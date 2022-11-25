@@ -1,0 +1,86 @@
+@use "../../../../assets/theme/colors.scss";
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    mat-card {
+        width: 700px;
+        height: 450px;
+        border-radius: 12px;
+    }
+
+    mat-card-header {
+        float: right;
+
+        button {
+            background-color: colors.$primary-color;
+            border-radius: 12px;
+            width: 200px;
+        }
+    }
+
+    .imagen-perfil {
+        display: flex;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: colors.$text-alternative-color;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            margin-top: 40%;
+            width: 20px;
+            height: 18px;
+        }
+    }
+}
+
+mat-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+
+    p {
+        input {
+            background-color: colors.$background-color;
+            border: 0;
+            font-size: 14px;
+            width: 238px;
+            height: 48px;
+            border-radius: 12px;
+            padding-left: 60px;
+            position: relative;
+            margin-bottom: 5px;
+            color: colors.$primary-color;
+        }
+
+        input::placeholder {
+            color: colors.$primary-color;
+        }
+
+        span {
+            font-size: 25px;
+            position: absolute;
+            display: block;
+            transform: translate(5px, -42px);
+        }
+
+        img {
+            position: absolute;
+            display: block;
+            transform: translate(5px, -42px);
+            color:colors.$text-primary-color;
+            width: 25px;
+        }
+    }
+}
