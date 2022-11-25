@@ -1,40 +1,73 @@
 @use "../../../../assets/theme/colors.scss";
+
 mat-card{
   width: 216px;
   height: 306px;
   border-radius: 12px;
-  
+  // display: flex;
+  // flex-direction: column;
+ 
 }
 
-mat-card > img{
-  border-radius: 8px;
-  width: 100%;
-  object-fit: cover;
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* text-align: center; */
+  align-content: center;
+  transform: translateX(-11px);
+
+  img{
+    border-radius: 8px;
+    object-fit: cover;
+    width: 206px;
+    height: 184px;
+    text-align: center;
+    margin-top: -13px;
+  }
+
+}  
+
+mat-card-content{
   text-align: center;
-  margin-top: -13px;
+  margin-top: 2px;
+
   
-}
-
-mat-card-content > * {
-  text-align: center;
-}
-
-mat-card-content > p {
-  color: colors.$accent-color;
-  font-size: 12px;
-  margin-top: -10px;
-}
 
 mat-card-title,
 mat-card-subtitle {
   font-size: 14px;
 }
 
+mat-card-title {
+  margin-top: 10px;
+}
+
+mat-card-subtitle {
+  margin-top: -10px;
+}
+
+  p {
+    color: colors.$accent-color;
+    font-size: 12px;
+    margin-top: -12px;
+  }
+
+
+}
+
+
+
+
+
+
 mat-card-actions {
   text-align: center;
   margin-top: -15px;
+
+  a > img {
+    width: 20px;
+    margin-right: 10px;
+  }
 }
-mat-card-actions > a > img {
-  width: 20px;
-  margin-right: 10px;
-}
+
