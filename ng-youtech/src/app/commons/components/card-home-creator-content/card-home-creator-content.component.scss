@@ -1,17 +1,18 @@
 @use "../../../../assets/theme/colors.scss";
-.example-card {
-  max-width: 216px;
-  max-height: 306px;
+mat-card{
+  width: 216px;
+  height: 306px;
   border-radius: 12px;
+  
 }
 
-mat-card > img {
+mat-card > img{
   border-radius: 8px;
-  width: 206px;
-  height: 184px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 4px;
+  width: 100%;
+  object-fit: cover;
+  text-align: center;
+  margin-top: -13px;
+  
 }
 
 mat-card-content > * {
@@ -21,7 +22,7 @@ mat-card-content > * {
 mat-card-content > p {
   color: colors.$accent-color;
   font-size: 12px;
-  margin-top: -5px;
+  margin-top: -10px;
 }
 
 mat-card-title,
