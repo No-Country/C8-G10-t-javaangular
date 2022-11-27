@@ -4,9 +4,10 @@ import NoCountry.YouTech.dto.contentCreator.ContentCreatorRequestDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -22,9 +23,8 @@ public class ContentCreatorController {
         return ResponseEntity.status(OK).body(service.update(dto, id));
     }
 
-    /*@GetPutMapping //get by id ... listado por usuario
-    public ResponseEntity<ContentCreatorResponseDTO> createNewActivity(@RequestBody ContentCreatorRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
-    }*/
+    @GetMapping("/all")
+    public ResponseEntity<List<ContentCreatorResponseDTO>> getAll() { return ResponseEntity.status(OK).body(service.getAllContentCreators());
+    }
 
 }

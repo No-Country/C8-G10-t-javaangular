@@ -1,7 +1,9 @@
 package NoCountry.YouTech.controlador;
 
+import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
+import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.user.UserRequestDTO;
-import NoCountry.YouTech.service.impl.UserService;
+import NoCountry.YouTech.security.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +23,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponseDTO> login(@RequestBody AuthenticationRequestDTO authRequest) throws Exception {
+        return ResponseEntity.ok(service.authenticate(authRequest));
+    }
 
 }

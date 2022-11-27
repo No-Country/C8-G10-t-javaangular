@@ -4,16 +4,13 @@ import NoCountry.YouTech.entities.User;
 import NoCountry.YouTech.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Locale;
-
-import static java.util.Collections.singletonList;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +24,6 @@ public class CustomDetailsService implements UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException(messageSource.getMessage("username-not-found", null, Locale.US));
         }
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getIsAdmin());
-
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), singletonList(authority));
-
-
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }
