@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContentCreatorResponseDTO {
+public class ContentCreator2UpdateDTO {
+    private Integer idContentCreator;
     private String name;
     private String lastName;
     private String urlGithub;
@@ -17,4 +18,6 @@ public class ContentCreatorResponseDTO {
     private String urlLinkedin;
     private String idPseudonym;
     private String imageProfile;
+    private String email;
+    private String password;
 }

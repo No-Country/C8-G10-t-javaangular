@@ -1,6 +1,6 @@
 package NoCountry.YouTech.repository;
 
-import NoCountry.YouTech.entities.BroadcastMediumTag;
+import NoCountry.YouTech.model.BroadcastMediumTag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

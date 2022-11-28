@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package NoCountry.YouTech.entities;
+package NoCountry.YouTech.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,49 +27,49 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jimy
  */
 @Entity
-@Table(name = "broadcast_type")
+@Table(name = "tag")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BroadcastType.findAll", query = "SELECT b FROM BroadcastType b")
-    , @NamedQuery(name = "BroadcastType.findByIdBroadcastType", query = "SELECT b FROM BroadcastType b WHERE b.idBroadcastType = :idBroadcastType")
-    , @NamedQuery(name = "BroadcastType.findByDescription", query = "SELECT b FROM BroadcastType b WHERE b.description = :description")
-    , @NamedQuery(name = "BroadcastType.findByStatus", query = "SELECT b FROM BroadcastType b WHERE b.status = :status")})
-public class BroadcastType implements Serializable {
+    @NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t")
+    , @NamedQuery(name = "Tag.findByIdTag", query = "SELECT t FROM Tag t WHERE t.idTag = :idTag")
+    , @NamedQuery(name = "Tag.findByDescription", query = "SELECT t FROM Tag t WHERE t.description = :description")
+    , @NamedQuery(name = "Tag.findByStatus", query = "SELECT t FROM Tag t WHERE t.status = :status")})
+public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_broadcast_type")
-    private Integer idBroadcastType;
+    @Column(name = "id_tag")
+    private Integer idTag;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
     @Column(name = "status")
     private short status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBroadcastType", fetch = FetchType.LAZY)
-    private List<BroadcastMedium> broadcastMediumList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTag", fetch = FetchType.LAZY)
+    private List<BroadcastMediumTag> broadcastMediumTagList;
 
-    public BroadcastType() {
+    public Tag() {
     }
 
-    public BroadcastType(Integer idBroadcastType) {
-        this.idBroadcastType = idBroadcastType;
+    public Tag(Integer idTag) {
+        this.idTag = idTag;
     }
 
-    public BroadcastType(Integer idBroadcastType, String description, short status) {
-        this.idBroadcastType = idBroadcastType;
+    public Tag(Integer idTag, String description, short status) {
+        this.idTag = idTag;
         this.description = description;
         this.status = status;
     }
 
-    public Integer getIdBroadcastType() {
-        return idBroadcastType;
+    public Integer getIdTag() {
+        return idTag;
     }
 
-    public void setIdBroadcastType(Integer idBroadcastType) {
-        this.idBroadcastType = idBroadcastType;
+    public void setIdTag(Integer idTag) {
+        this.idTag = idTag;
     }
 
     public String getDescription() {
@@ -89,29 +89,29 @@ public class BroadcastType implements Serializable {
     }
 
     @XmlTransient
-    public List<BroadcastMedium> getBroadcastMediumList() {
-        return broadcastMediumList;
+    public List<BroadcastMediumTag> getBroadcastMediumTagList() {
+        return broadcastMediumTagList;
     }
 
-    public void setBroadcastMediumList(List<BroadcastMedium> broadcastMediumList) {
-        this.broadcastMediumList = broadcastMediumList;
+    public void setBroadcastMediumTagList(List<BroadcastMediumTag> broadcastMediumTagList) {
+        this.broadcastMediumTagList = broadcastMediumTagList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idBroadcastType != null ? idBroadcastType.hashCode() : 0);
+        hash += (idTag != null ? idTag.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BroadcastType)) {
+        if (!(object instanceof Tag)) {
             return false;
         }
-        BroadcastType other = (BroadcastType) object;
-        if ((this.idBroadcastType == null && other.idBroadcastType != null) || (this.idBroadcastType != null && !this.idBroadcastType.equals(other.idBroadcastType))) {
+        Tag other = (Tag) object;
+        if ((this.idTag == null && other.idTag != null) || (this.idTag != null && !this.idTag.equals(other.idTag))) {
             return false;
         }
         return true;
@@ -119,7 +119,7 @@ public class BroadcastType implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroadcastType[ idBroadcastType=" + idBroadcastType + " ]";
+        return "NoCountry.YouTech.entities.Tag[ idTag=" + idTag + " ]";
     }
     
 }

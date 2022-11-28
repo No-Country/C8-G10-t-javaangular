@@ -1,6 +1,6 @@
 package NoCountry.YouTech.repository;
 
-import NoCountry.YouTech.entities.User;
+import NoCountry.YouTech.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

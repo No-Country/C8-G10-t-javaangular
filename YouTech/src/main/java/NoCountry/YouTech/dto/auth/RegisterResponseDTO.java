@@ -8,15 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterResponseDTO {
-    private Long id;
-
-    private String firstName;
-
-    private String lastName;
-
+    private Long idUser;
     private String email;
-
-    private String photo;
-
     private String token;
 }

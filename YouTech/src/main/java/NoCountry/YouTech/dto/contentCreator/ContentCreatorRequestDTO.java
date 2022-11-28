@@ -14,5 +14,9 @@ public class ContentCreatorRequestDTO {
     private String lastName;
     private String idPseudonym;
     private String imageProfile;
-
+    private String urlGithub;
+    private String urlTwitter;
+    private String urlLinkedin;
+    private String email;
+    private String password;
 }

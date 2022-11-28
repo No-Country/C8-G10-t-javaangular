@@ -4,9 +4,8 @@ import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
 import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.auth.RegisterResponseDTO;
 import NoCountry.YouTech.dto.user.UserRequestDTO;
-import NoCountry.YouTech.dto.user.UserResponseDTO;
-import NoCountry.YouTech.entities.ContentCreator;
-import NoCountry.YouTech.entities.User;
+import NoCountry.YouTech.model.ContentCreator;
+import NoCountry.YouTech.model.User;
 import NoCountry.YouTech.exception.AlreadyExistsException;
 import NoCountry.YouTech.exception.BadRequestException;
 import NoCountry.YouTech.mapper.GenericMapper;
@@ -83,4 +82,5 @@ public class UserService {
             throw new BadRequestException(messageSource.getMessage("user-not-found", null, Locale.US));
         }
     }
+
 }

@@ -1,6 +1,6 @@
 package NoCountry.YouTech.security.auth;
 
-import NoCountry.YouTech.entities.User;
+import NoCountry.YouTech.model.User;
 import NoCountry.YouTech.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
