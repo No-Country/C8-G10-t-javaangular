@@ -26,10 +26,15 @@
   />
   <div class="link">
     <h1>Sigue su contenido en el siguiente enlace:</h1>
-    <button mat-button color="primary">
+    <a
+      mat-flat-button
+      href="https://www.google.com/"
+      color="primary"
+      target="_blank"
+    >
       <mat-icon>language</mat-icon>
-      midudev
-    </button>
+      midudev</a
+    >
   </div>
 </section>
 
@@ -38,9 +43,7 @@
 <section class="container-tags">
   <h1>¿Qué temas trata?</h1>
   <mat-chip-list aria-label="Fish selection">
-    <mat-chip>One fish</mat-chip>
-    <mat-chip>Two fish</mat-chip>
-    <mat-chip color="primary">Primary fish</mat-chip>
-    <mat-chip color="accent">Accent fish</mat-chip>
+    <mat-chip color="primary" selected>Primary fish</mat-chip>
+    <mat-chip color="primary" selected>Accent fish</mat-chip>
   </mat-chip-list>
 </section>
