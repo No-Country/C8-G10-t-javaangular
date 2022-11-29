@@ -1,6 +1,6 @@
 @use "../../../../../assets/theme/colors.scss";
 
-::ng-deep .demo {
+::ng-deep .shadow-login {
   background-color: colors.$background-card-color;
   box-shadow: 0px 0px 10px rgba(0, 204, 203, 0.25);
 }
@@ -12,6 +12,7 @@
   align-items: center;
   &__title {
     font-weight: bold;
+    cursor: pointer;
     span {
       color: colors.$primary-color;
     }
