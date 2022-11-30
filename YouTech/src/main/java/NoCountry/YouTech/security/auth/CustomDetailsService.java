@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,10 +21,10 @@ public class CustomDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername (String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email);
+        Optional<User> user = repository.findByEmail(email);
         if(user == null) {
             throw new UsernameNotFoundException(messageSource.getMessage("username-not-found", null, Locale.US));
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), new ArrayList<>());
     }
 }

@@ -27,6 +27,9 @@ public class CustomAuthenticatorManager implements AuthenticationManager {
         return new BCryptPasswordEncoder();
     }
 
+
+
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         final UserDetails userDetail = customDetailsService.loadUserByUsername(authentication.getName());

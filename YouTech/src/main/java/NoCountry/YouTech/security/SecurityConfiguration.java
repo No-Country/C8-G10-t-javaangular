@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -18,14 +19,14 @@ public class SecurityConfiguration {
 
     private final JwtRequestFilter jwtFilter;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/*").permitAll()
-                .antMatchers("/content_creator/*").permitAll()
+                .antMatchers(GET, "/**").permitAll()
                 .anyRequest().authenticated()
+                .and().exceptionHandling()
                 .and().sessionManagement().
                 sessionCreationPolicy(STATELESS);
 

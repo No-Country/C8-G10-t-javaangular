@@ -2,6 +2,7 @@ package NoCountry.YouTech.controlador;
 
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
+import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,18 @@ public class ContentCreatorController {
 
     private final IContentCreator service;
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ContentCreatorResponseDTO> update(@RequestBody ContentCreator2UpdateDTO dto, @PathVariable Long id) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(dto, id));
+    @PutMapping
+    public ResponseEntity<ContentCreatorResponseDTO> update(@RequestHeader("Authorization") String jwt, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(jwt, dto));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<ContentCreatorResponseDTO>> getAll() { return ResponseEntity.status(OK).body(service.getAllContentCreators());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ContentCreator> getById(@PathVariable Integer id) {
+        return ResponseEntity.status(OK).body(service.getById(id));
     }
 
 

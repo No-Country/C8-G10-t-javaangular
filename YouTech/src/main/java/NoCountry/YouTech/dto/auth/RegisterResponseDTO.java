@@ -10,5 +10,5 @@ import lombok.*;
 public class RegisterResponseDTO {
     private Long idUser;
     private String email;
-    private String token;
+    private String jwt;
 }

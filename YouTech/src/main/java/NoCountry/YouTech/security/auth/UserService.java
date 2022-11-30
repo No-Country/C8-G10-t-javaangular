@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +47,8 @@ public class UserService {
     private final CustomDetailsService userDetailsService;
 
     public RegisterResponseDTO save(UserRequestDTO dto) {
-        User userCheck = repository.findByEmail(dto.getEmail());
-        if (userCheck != null)
+        Optional<User> userCheck = repository.findByEmail(dto.getEmail());
+        if (userCheck.isPresent())
             throw new AlreadyExistsException(messageSource.getMessage("email-already-exists", null, Locale.US));
 
         User newUser = mapper.map(dto, User.class);
@@ -61,7 +62,7 @@ public class UserService {
         RegisterResponseDTO registerResponseDto = mapper.map(newUser, RegisterResponseDTO.class);
         AuthenticationRequestDTO authenticationRequest = new AuthenticationRequestDTO(dto.getEmail(), dto.getPassword());
         AuthenticationResponseDTO token = authenticate(authenticationRequest);
-        registerResponseDto.setToken(token.getJwt());
+        registerResponseDto.setJwt(token.getJwt());
         return registerResponseDto;
     }
 
