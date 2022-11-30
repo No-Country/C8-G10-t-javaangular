@@ -3,7 +3,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
+import { CreatorContentDetailComponent } from './components/creator-content-detail/creator-content-detail.component';
 @Component({
   selector: 'app-home-flow',
   templateUrl: './home-flow.component.html',
@@ -18,13 +20,23 @@ export class HomeFlowComponent {
 
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
         fruit ? this._filter(fruit) : this.allFruits.slice()
       )
     );
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(CreatorContentDetailComponent, {
+      maxWidth: '800px',
+      panelClass: 'demo',
+    });
   }
 
   add(event: MatChipInputEvent): void {

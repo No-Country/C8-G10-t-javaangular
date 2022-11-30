@@ -1,5 +1,5 @@
 <header class="header">
-  <h1 class="header__title">You<span>Tech</span></h1>
+  <h1 class="header__title" routerLink="/">You<span>Tech</span></h1>
 
   <section class="actions">
     <ng-container *ngIf="isLoggedIn; else default">
@@ -14,7 +14,7 @@
         Iniciar sesión
       </button>
 
-      <mat-menu #menu="matMenu" class="demo">
+      <mat-menu #menu="matMenu" class="shadow-login">
         <app-login-flow></app-login-flow>
       </mat-menu>
     </ng-template>
