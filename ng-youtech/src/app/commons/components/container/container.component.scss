@@ -1,27 +1,37 @@
 @use "../../../../assets/theme/colors.scss";
-.banner-home {
+.container-principal {
   display: flex;
-  justify-content: center;
-  padding: 1em 0 1em 0;
-  align-items: center;
-  background-color: colors.$background-black-color;
+  flex-direction: column;
+  height: 100%;
 
-  &__message {
-    font-weight: bold;
+  .banner-home {
+    display: flex;
+    justify-content: center;
+    padding: 1em 0 1em 0;
+    align-items: center;
+    background-color: colors.$background-black-color;
+
+    &__message {
+      font-weight: bold;
+    }
+    &__image {
+      max-width: 15%;
+    }
   }
-  &__image {
-    max-width: 15%;
+
+  .main-admin {
+    flex: 1 1 auto;
   }
-}
 
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  &__content {
-    max-width: 80%;
-    width: 100%;
-    padding: 1em;
+    &__content {
+      max-width: 80%;
+      width: 100%;
+      padding: 1em;
+    }
   }
 }

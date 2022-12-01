@@ -1,57 +1,74 @@
-<div class="center-content">
-  <mat-card>
-    <mat-card-header>
-      <button mat-raised-button>Guardar</button>
-    </mat-card-header>
+<div class="main">
+  <form class="container">
+    <section class="container-button">
+      <button class="" mat-flat-button color="primary">Guardar</button>
+    </section>
 
-    <a href="" class="imagen-perfil">
-      <img src="assets/photo.png" alt="" />
-    </a>
-
-    <mat-card-content>
-      <div>
-        <p>
-          <input type="text" placeholder="Nombres" />
-          <span class="material-icons"> account_circle </span>
-        </p>
-
-        <p>
-          <input type="text" placeholder="Apellidos" />
-          <span class="material-icons"> account_circle </span>
-        </p>
-
-        <p>
-          <input type="text" placeholder="Pseudonimo" />
-          <span class="material-icons"> account_circle </span>
-        </p>
-
-        <p>
-          <input type="email" placeholder="E-mail" />
-          <span class="material-icons"> mail </span>
-        </p>
+    <div class="container-photo">
+      <div
+        class="upload-photo"
+        mat-elevation-z4
+        matRipple
+        [matRippleCentered]="true"
+        [matRippleRadius]="75"
+        [matRippleUnbounded]="true"
+      >
+        <span class="material-icons"> add_a_photo </span>
       </div>
+    </div>
 
-      <div>
-        <p>
-          <input type="password" placeholder="Contraseña" />
-          <span class="material-icons"> password </span>
-        </p>
+    <section class="form">
+      <section class="column1">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>account_circle</mat-icon>
+        </mat-form-field>
 
-        <p>
-          <input type="text" placeholder="GitHub" />
-          <img src="assets/images/github.png" width="40px" />
-        </p>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>account_circle</mat-icon>
+        </mat-form-field>
 
-        <p>
-          <input type="text" placeholder="Twitter" />
-          <img src="assets/images/twitter.png" width="40px" />
-        </p>
+        <mat-form-field appearance="outline">
+          <mat-label>Pseudonimo</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>account_circle</mat-icon>
+        </mat-form-field>
 
-        <p>
-          <input type="text" placeholder="Linkedin" />
-          <img src="assets/images/linkedin.png" width="40px" />
-        </p>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+      </section>
+
+      <section class="column2">
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>alternate_email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>alternate_email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>alternate_email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" />
+          <mat-icon matPrefix>alternate_email</mat-icon>
+        </mat-form-field>
+      </section>
+    </section>
+  </form>
 </div>

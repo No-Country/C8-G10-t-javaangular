@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // background-color: yellow;
+
+  .search {
+    // width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1em;
+    mat-form-field {
+      width: 70%;
+    }
+  }
+
+  .broadcast-medium {
+    display: inline-flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

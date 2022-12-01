@@ -25,7 +25,7 @@ export class MenuCreatorContentComponent implements OnInit {
 
   constructor(private _routerService: RouteService) {
     this._routerService.navigationEnd().subscribe((navigation) => {
-      this.menuSelected = navigation.url;
+      this.menuSelected = navigation.urlAfterRedirects;
     });
   }
 

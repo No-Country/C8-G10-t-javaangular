@@ -1,17 +1,19 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
+import { IResponseContentCreatorHome } from '../../../commons/services/home/home-api.interface';
+import { HomeApiService } from '../../../commons/services/home/home-api.service';
 import { CreatorContentDetailComponent } from './components/creator-content-detail/creator-content-detail.component';
 @Component({
   selector: 'app-home-flow',
   templateUrl: './home-flow.component.html',
   styleUrls: ['./home-flow.component.scss'],
 })
-export class HomeFlowComponent {
+export class HomeFlowComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl('');
   filteredFruits: Observable<string[]>;
@@ -20,13 +22,22 @@ export class HomeFlowComponent {
 
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private _homeApiService: HomeApiService
+  ) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
         fruit ? this._filter(fruit) : this.allFruits.slice()
       )
     );
+  }
+  listContentCreator: IResponseContentCreatorHome[] = [];
+  ngOnInit(): void {
+    this._homeApiService.getAllContentCreator().subscribe((response) => {
+      this.listContentCreator = response;
+    });
   }
 
   openDialog(

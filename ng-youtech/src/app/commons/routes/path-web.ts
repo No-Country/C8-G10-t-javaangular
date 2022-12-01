@@ -7,7 +7,7 @@ interface ConfigPath {
 export class PathWeb {
   private static pathAuthRegister = 'register';
   private static pathContentCreator = 'content-creator';
-  private static pathAdministrator = 'admin';
+  private static pathAdministrator = 'administrator';
 
   static readonly AUTH: { register: ConfigPath } = {
     register: {

@@ -1,0 +1,51 @@
+<mat-card class="container">
+  <mat-card-content class="content">
+    <img class="content__image" src="assets/images/midudev.jpg" />
+
+    <section class="information">
+      <section class="item">
+        <span class="item__title">Nombre</span>
+        <span class="item__description">Midudev</span>
+      </section>
+
+      <section class="item">
+        <span class="item__title">PLataforma</span>
+        <div class="platform">
+          <img class="platform__image" src="assets/images/logoyoutube.png" />
+          <span class="platform__description">Youtube</span>
+        </div>
+      </section>
+
+      <section class="item">
+        <span class="item__title">Palabras clave (los 5 primeros)</span>
+        <cdk-virtual-scroll-viewport
+          appendOnly
+          itemSize="5"
+          class="example-viewport"
+        >
+          <mat-chip-list>
+            <mat-chip color="primary" selected>Primary fish</mat-chip>
+            <mat-chip color="primary" selected>Accent fish</mat-chip>
+            <mat-chip color="primary" selected>Primary fish</mat-chip>
+            <mat-chip color="primary" selected>Accent fish</mat-chip>
+            <mat-chip color="primary" selected>Primary fish</mat-chip>
+          </mat-chip-list>
+        </cdk-virtual-scroll-viewport>
+      </section>
+    </section>
+
+    <div class="actions">
+      <div class="circle">
+        <button mat-icon-button color="warn">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+
+      <div class="circle">
+        <button mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
