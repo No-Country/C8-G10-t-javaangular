@@ -1,0 +1,9 @@
+@use "../../../assets/theme/colors.scss";
+.container {
+  //   background-color: red;
+  height: 100%;
+  .menu {
+    background-color: colors.$background-black-color;
+    width: 212px;
+  }
+}
