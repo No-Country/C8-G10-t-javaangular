@@ -2,7 +2,6 @@ package NoCountry.YouTech.service.impl;
 
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
-import NoCountry.YouTech.exception.UnableToUpdateEntityException;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.exception.EmptyListException;
 import NoCountry.YouTech.exception.NotFoundException;
@@ -10,7 +9,6 @@ import NoCountry.YouTech.mapper.GenericMapper;
 import NoCountry.YouTech.model.User;
 import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
-import NoCountry.YouTech.security.jwt.JwtUtils;
 import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 
 @Service
@@ -30,30 +27,17 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final GenericMapper mapper;
     private final MessageSource messageSource;
 
-    private final JwtUtils jwtUtils;
 
-
-    public ContentCreatorResponseDTO update(String jwt, ContentCreator2UpdateDTO dto) {
-        User user = repository.findByEmail(jwtUtils.extractUsername(jwt)).orElseThrow(
+    public ContentCreatorResponseDTO update(String userName, ContentCreator2UpdateDTO dto) {
+        User user = repository.findByEmail(userName).orElseThrow(
                 ()-> new NotFoundException(
                         messageSource.getMessage("user-not-found", null, Locale.US))
         );
-        try{
-            ContentCreator updatedContentCreator = mapper.map(dto, ContentCreator.class);
-            creatorRepository.save(updatedContentCreator);
-            return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
-        } catch (Exception E) {
-            throw new UnableToUpdateEntityException(
-                    messageSource.getMessage("unable-to-update-content-creator", null, Locale.US));
-        }
+        ContentCreator updatedContentCreator = mapper.map(dto, ContentCreator.class);
+        creatorRepository.save(updatedContentCreator);
+        return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
     }
-    /*
-    private ContentCreator getCreatorById(Integer id) {
-        return creatorRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException(
-                        messageSource.getMessage("content-creator-not-found", new Object[] {id}, Locale.US))
-        );
-    }*/
+
 
     public List<ContentCreatorResponseDTO> getAllContentCreators() {
         List<ContentCreator> creators =creatorRepository.findAll();

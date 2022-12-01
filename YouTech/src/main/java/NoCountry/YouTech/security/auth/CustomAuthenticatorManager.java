@@ -19,16 +19,12 @@ import java.util.Locale;
 public class CustomAuthenticatorManager implements AuthenticationManager {
 
     private final CustomDetailsService customDetailsService;
-
     private final MessageSource messageSource;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

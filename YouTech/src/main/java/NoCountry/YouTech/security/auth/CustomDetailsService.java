@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CustomDetailsService implements UserDetailsService {
+
     private final UserRepository repository;
     private final MessageSource messageSource;
 

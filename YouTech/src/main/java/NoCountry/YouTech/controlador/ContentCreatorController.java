@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -21,8 +22,8 @@ public class ContentCreatorController {
     private final IContentCreator service;
 
     @PutMapping
-    public ResponseEntity<ContentCreatorResponseDTO> update(@RequestHeader("Authorization") String jwt, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(jwt, dto));
+    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(principal.getName(), dto));
     }
 
     @GetMapping("/all")
