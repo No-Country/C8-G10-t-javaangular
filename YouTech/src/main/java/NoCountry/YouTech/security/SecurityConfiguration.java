@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers("/content_creator/*").permitAll()
+                .antMatchers("/tag/*").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().
                 sessionCreationPolicy(STATELESS);
