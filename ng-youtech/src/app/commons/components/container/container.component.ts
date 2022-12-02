@@ -8,7 +8,7 @@ import { RouteService } from '../../services/route.service';
 })
 export class ContainerComponent implements OnInit {
   showBannerHome = false;
-  isAdmin = false;
+  isAdmin = true;
   constructor(private _routerService: RouteService) {
     this._validHomePath();
   }

@@ -75,12 +75,20 @@ export const ADMINISTRATOR_ROUTES: Routes = [
         component: CreatorContentPageComponent,
       },
       {
-        path: PathWeb.ADMINISTRATOR.maintenance.path,
-        title: PathWeb.ADMINISTRATOR.maintenance.title,
+        path: PathWeb.ADMINISTRATOR.maintenanceTag.path,
+        title: PathWeb.ADMINISTRATOR.maintenanceTag.title,
         loadChildren: () =>
           import(
-            '../../pages/administrator/maintenance/maintenance.module'
-          ).then((m) => m.MaintenanceModule),
+            '../../pages/administrator/maintenance/maintenance-tag/maintenance-tag.module'
+          ).then((m) => m.MaintenanceTagModule),
+      },
+      {
+        path: PathWeb.ADMINISTRATOR.maintenanceBroadcastType.path,
+        title: PathWeb.ADMINISTRATOR.maintenanceBroadcastType.title,
+        loadChildren: () =>
+          import(
+            '../../pages/administrator/maintenance/maintenance-broadcast-type/maintenance-broadcast-type.module'
+          ).then((m) => m.MaintenanceBroadcastTypeModule),
       },
       {
         path: '',

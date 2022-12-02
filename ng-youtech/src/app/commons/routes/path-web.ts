@@ -42,7 +42,8 @@ export class PathWeb {
     readonly path: string;
     readonly pathWithSlash: string;
     contentCreator: ConfigPath;
-    maintenance: ConfigPath;
+    maintenanceTag: ConfigPath;
+    maintenanceBroadcastType: ConfigPath;
   } = {
     path: this.pathAdministrator,
     pathWithSlash: `/${this.pathAdministrator}`,
@@ -52,10 +53,15 @@ export class PathWeb {
       pathWithSlash: `/${this.pathAdministrator}/content-creator`,
       title: 'Creadores de contenido',
     },
-    maintenance: {
-      path: 'maintenance',
-      pathWithSlash: `/${this.pathAdministrator}/maintenance`,
-      title: 'Mantenimiento',
+    maintenanceTag: {
+      path: 'maintenance-tag',
+      pathWithSlash: `/${this.pathAdministrator}/maintenance-tag`,
+      title: 'Mantenimiento de Tags',
+    },
+    maintenanceBroadcastType: {
+      path: 'maintenance-broadcast-type',
+      pathWithSlash: `/${this.pathAdministrator}/maintenance-broadcast-type`,
+      title: 'Mantenimiento de Medios de difusión',
     },
   };
 }
