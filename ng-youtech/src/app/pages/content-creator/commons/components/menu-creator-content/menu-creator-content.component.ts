@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PathWeb } from '../../../../../commons/routes/path-web';
-import { RouteService } from '../../../../../commons/services/route.service';
+import { RouteService } from '../../../../../commons/services/local/route.service';
 
 @Component({
   selector: 'app-menu-creator-content',

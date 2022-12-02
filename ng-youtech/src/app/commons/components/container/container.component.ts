@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteService } from '../../services/route.service';
+import { RouteService } from '../../services/local/route.service';
 
 @Component({
   selector: 'app-container',

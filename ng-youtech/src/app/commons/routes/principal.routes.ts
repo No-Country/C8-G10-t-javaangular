@@ -79,16 +79,16 @@ export const ADMINISTRATOR_ROUTES: Routes = [
         title: PathWeb.ADMINISTRATOR.maintenanceTag.title,
         loadChildren: () =>
           import(
-            '../../pages/administrator/maintenance/maintenance-tag/maintenance-tag.module'
-          ).then((m) => m.MaintenanceTagModule),
+            '../../pages/administrator/maintenance-tag-page/maintenance-tag-page.module'
+          ).then((m) => m.MaintenanceTagPageModule),
       },
       {
         path: PathWeb.ADMINISTRATOR.maintenanceBroadcastType.path,
         title: PathWeb.ADMINISTRATOR.maintenanceBroadcastType.title,
         loadChildren: () =>
           import(
-            '../../pages/administrator/maintenance/maintenance-broadcast-type/maintenance-broadcast-type.module'
-          ).then((m) => m.MaintenanceBroadcastTypeModule),
+            '../../pages/administrator/maintenance-broadcast-type-page/maintenance-broadcast-type-page.module'
+          ).then((m) => m.MaintenanceBroadcastTypePageModule),
       },
       {
         path: '',

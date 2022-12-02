@@ -9,23 +9,23 @@
         <mat-icon matListIcon>home</mat-icon>
         Creadores
       </mat-list-item>
+
+      <mat-list-item
+        [routerLink]="PATH_MAINTENANCE_TAGS"
+        routerLinkActive="selected"
+      >
+        <mat-icon matListIcon>settings</mat-icon>
+        Mantenimiento Tags
+      </mat-list-item>
+
+      <mat-list-item
+        [routerLink]="PATH_MAINTENANCE_BROADCASTTYPE"
+        routerLinkActive="selected"
+      >
+        <mat-icon matListIcon>settings</mat-icon>
+        Mantenimiento Medios de difusión
+      </mat-list-item>
     </mat-nav-list>
-
-    <mat-list-item
-      [routerLink]="PATH_MAINTENANCE_TAGS"
-      routerLinkActive="selected"
-    >
-      <mat-icon matListIcon>settings</mat-icon>
-      Mantenimiento Tags
-    </mat-list-item>
-
-    <mat-list-item
-      [routerLink]="PATH_MAINTENANCE_BROADCASTTYPE"
-      routerLinkActive="selected"
-    >
-      <mat-icon matListIcon>settings</mat-icon>
-      Mantenimiento Medios de difusión
-    </mat-list-item>
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
