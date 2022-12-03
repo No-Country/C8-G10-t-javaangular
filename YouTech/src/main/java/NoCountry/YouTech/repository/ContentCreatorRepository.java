@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContentCreatorRepository extends JpaRepository <ContentCreator, Integer> {
-    public String findByName (@Param("name") String name);
+    public String findByName(@Param("name") String name);
 
 }
