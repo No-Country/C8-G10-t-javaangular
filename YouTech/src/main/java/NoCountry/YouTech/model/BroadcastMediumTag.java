@@ -98,7 +98,7 @@ public class BroadcastMediumTag implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroadcastMediumTag[ idBroadcastMediumTag=" + idBroadcastMediumTag + " ]";
+        return "NoCountry.YouTech.model.BroadcastMediumTag[ idBroadcastMediumTag=" + idBroadcastMediumTag + " ]";
     }
     
 }

@@ -119,7 +119,7 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.Tag[ idTag=" + idTag + " ]";
+        return "NoCountry.YouTech.model.Tag[ idTag=" + idTag + " ]";
     }
     
 }

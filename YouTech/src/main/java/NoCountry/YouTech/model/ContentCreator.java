@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -68,8 +69,9 @@ public class ContentCreator implements Serializable {
     private String urlLinkedin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idContentCreator", fetch = FetchType.LAZY)
     private List<BroadcastMedium> broadcastMediumList;
+    
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    @ManyToOne(fetch = FetchType.LAZY)
     private User idUser;
 
     public ContentCreator() {
@@ -189,7 +191,7 @@ public class ContentCreator implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.ContentCreator[ idContentCreator=" + idContentCreator + " ]";
+        return "NoCountry.YouTech.model.ContentCreator[ idContentCreator=" + idContentCreator + " ]";
     }
-    
+
 }

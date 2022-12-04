@@ -178,7 +178,7 @@ public class BroadcastMedium implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroadcastMedium[ idBroadcastMedium=" + idBroadcastMedium + " ]";
+        return "NoCountry.YouTech.model.BroadcastMedium[ idBroadcastMedium=" + idBroadcastMedium + " ]";
     }
     
 }

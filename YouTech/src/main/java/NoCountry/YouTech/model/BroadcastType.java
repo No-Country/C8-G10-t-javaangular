@@ -119,7 +119,7 @@ public class BroadcastType implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.BroadcastType[ idBroadcastType=" + idBroadcastType + " ]";
+        return "NoCountry.YouTech.model.BroadcastType[ idBroadcastType=" + idBroadcastType + " ]";
     }
     
 }

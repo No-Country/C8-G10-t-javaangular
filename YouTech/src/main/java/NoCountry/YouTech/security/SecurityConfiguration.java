@@ -1,5 +1,7 @@
 package NoCountry.YouTech.security;
 
+import NoCountry.YouTech.security.jwt.CustomAuthenticationEntryPoint;
+import NoCountry.YouTech.security.jwt.JwtExceptionFilter;
 import NoCountry.YouTech.security.jwt.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +20,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfiguration {
 
     private final JwtRequestFilter jwtFilter;
+    private final JwtExceptionFilter jwtExceptionFilter;
 
 
     @Bean
@@ -27,10 +30,17 @@ public class SecurityConfiguration {
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers(GET, "/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .cors()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and().sessionManagement().
+
                 sessionCreationPolicy(STATELESS);
 
-               http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtExceptionFilter, JwtRequestFilter.class);
 
 
         return http.build();

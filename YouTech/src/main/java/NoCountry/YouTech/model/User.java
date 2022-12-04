@@ -7,17 +7,7 @@ package NoCountry.YouTech.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,11 +42,11 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "is_admin")
     private boolean isAdmin;
-    @Basic(optional = true)
+    @Basic(optional = false)
     @Column(name = "status")
-    private short status;
-    @OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY)
-    private List<ContentCreator> contentCreatorList;
+    private short status = 1;
+    @OneToOne(mappedBy = "idUser")
+    private ContentCreator contentCreator;
 
     public User() {
     }
@@ -113,16 +103,14 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    @XmlTransient
-    public List<ContentCreator> getContentCreatorList() {
-        return contentCreatorList;
+    public ContentCreator getContentCreator() {
+        return contentCreator;
     }
 
-    public void setContentCreatorList(List<ContentCreator> contentCreatorList) {
-        this.contentCreatorList = contentCreatorList;
+    public void setContentCreator(ContentCreator contentCreator) {
+        this.contentCreator = contentCreator;
     }
 
-    @Override
     public int hashCode() {
         int hash = 0;
         hash += (idUser != null ? idUser.hashCode() : 0);
@@ -144,7 +132,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "NoCountry.YouTech.entities.User[ idUser=" + idUser + " ]";
+        return "NoCountry.YouTech.model.User[ idUser=" + idUser + " ]";
     }
-    
+
 }
