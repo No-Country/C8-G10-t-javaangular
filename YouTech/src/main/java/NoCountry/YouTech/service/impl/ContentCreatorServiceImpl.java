@@ -34,23 +34,26 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final MessageSource messageSource;
 
 
-    public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto, Long id) {
+    public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto, Integer id) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
         );
-        ContentCreator entity = getContentCreatorById(id);
+        
+        /*
+        TODO Jimy hay que modificar en la DB el orden de las entidades que se van creando en la tabla CC
         if (entity.getIdContentCreator() != user.getIdUser().intValue()) {
             throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
-        }
+        }*/
+
         ContentCreator updatedContentCreator = mapper.map(dto, ContentCreator.class);
-        updatedContentCreator.setIdContentCreator(entity.getIdContentCreator());
+        updatedContentCreator.setIdContentCreator(getContentCreatorById(id).getIdContentCreator());
         updatedContentCreator = creatorRepository.save(updatedContentCreator);
         return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
     }
 
-    private ContentCreator getContentCreatorById(Long id) {
-        Optional<ContentCreator> entity = creatorRepository.findById(id.intValue());
+    private ContentCreator getContentCreatorById(Integer id) {
+        Optional<ContentCreator> entity = this.creatorRepository.findById(id);
         if (entity.isEmpty()) {
             throw new NotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
         }
@@ -73,12 +76,12 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
     }
 
-    public BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto, Long id) {
+    public BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto, Integer id) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
         );
-        ContentCreator creator = getContentCreatorById(id);
+        ContentCreator creator = getById(id);
         if (creator.getIdContentCreator() != user.getIdUser().intValue()) {
             throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
         }

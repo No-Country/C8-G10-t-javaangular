@@ -18,5 +18,7 @@ public class BroadcastMediumRequestDTO {
     private String description;
     private String url;
     private Integer status;
+    private Integer idBroadcastType;
+    private Integer idContentCreator;
     private List<BroadcastMediumTag> broadcastMediumTagList;
 }

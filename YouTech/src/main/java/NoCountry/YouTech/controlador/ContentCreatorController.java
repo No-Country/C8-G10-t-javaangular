@@ -22,7 +22,7 @@ public class ContentCreatorController {
     private final IContentCreator service;
 
     @PostMapping("/{id}")
-    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto, @PathVariable Long id) throws Exception {
+    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto, @PathVariable Integer id) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(principal.getName(), dto, id));
     }
 
@@ -34,10 +34,7 @@ public class ContentCreatorController {
     public ResponseEntity<ContentCreator> getById(@PathVariable Integer id) {
         return ResponseEntity.status(OK).body(service.getById(id));
     }
-/*
-    @PostMapping("/{id}")
-    public ResponseEntity<?> registerBroadcastMedium(Principal principal, @RequestBody BroadcastMediumRequestDTO dto, Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveBroadcastMedium(principal.getName(), dto, id));
-    }*/
+
+
 
 }
