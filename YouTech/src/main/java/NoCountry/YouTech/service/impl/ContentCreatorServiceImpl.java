@@ -1,12 +1,16 @@
 package NoCountry.YouTech.service.impl;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
+import NoCountry.YouTech.model.BroadcastMedium;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.exception.EmptyListException;
 import NoCountry.YouTech.exception.NotFoundException;
 import NoCountry.YouTech.mapper.GenericMapper;
 import NoCountry.YouTech.model.User;
+import NoCountry.YouTech.repository.BroadcastMediumRepository;
 import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
 import NoCountry.YouTech.service.IContentCreator;
@@ -15,7 +19,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -26,6 +29,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
 
     private final ContentCreatorRepository creatorRepository;
     private final UserRepository repository;
+    private final BroadcastMediumRepository broadcastMediumRepository;
     private final GenericMapper mapper;
     private final MessageSource messageSource;
 
@@ -67,5 +71,20 @@ public class ContentCreatorServiceImpl implements IContentCreator {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
         return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
+    }
+
+    public BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto, Long id) {
+        User user = repository.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException(messageSource.getMessage("user-not-found",
+                        null, Locale.US))
+        );
+        ContentCreator creator = getContentCreatorById(id);
+        if (creator.getIdContentCreator() != user.getIdUser().intValue()) {
+            throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
+        }
+        BroadcastMedium entity = mapper.map(dto, BroadcastMedium.class);
+        entity.setIdContentCreator(creator);
+        entity = broadcastMediumRepository.save(entity);
+        return mapper.map(entity, BroadcastMediumResponseDTO.class);
     }
 }

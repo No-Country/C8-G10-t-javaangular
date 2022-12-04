@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContentCreatorResponseDTO {
+    private Integer idContentCreator;
     private String name;
     private String lastName;
     private String urlGithub;

@@ -1,5 +1,6 @@
 package NoCountry.YouTech.controlador;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.model.ContentCreator;
@@ -33,5 +34,10 @@ public class ContentCreatorController {
     public ResponseEntity<ContentCreator> getById(@PathVariable Integer id) {
         return ResponseEntity.status(OK).body(service.getById(id));
     }
+/*
+    @PostMapping("/{id}")
+    public ResponseEntity<?> registerBroadcastMedium(Principal principal, @RequestBody BroadcastMediumRequestDTO dto, Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveBroadcastMedium(principal.getName(), dto, id));
+    }*/
 
 }
