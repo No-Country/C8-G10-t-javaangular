@@ -1,7 +1,10 @@
 package NoCountry.YouTech.service.impl;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
+import NoCountry.YouTech.dto.tag.TagResponseDTO;
 import NoCountry.YouTech.exception.EmptyListException;
+import NoCountry.YouTech.mapper.GenericMapper;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.model.Tag;
 import NoCountry.YouTech.repository.TagRepository;
@@ -19,12 +22,13 @@ public class TagServiceImpl implements ITag {
 
     private final TagRepository repository;
     private final MessageSource messageSource;
+    private final GenericMapper mapper;
 
-    public List<Tag> getAllTags() {
+    public List<TagResponseDTO> getAllTags() {
         List<Tag> tags = repository.findAll();
         if (tags.isEmpty()) {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
-        return tags;
+        return mapper.mapAll(tags, TagResponseDTO.class);
     }
 }

@@ -52,7 +52,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "is_admin")
     private boolean isAdmin;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "status")
     private short status;
     @OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY)

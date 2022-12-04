@@ -1,5 +1,6 @@
 package NoCountry.YouTech.controlador;
 
+import NoCountry.YouTech.dto.tag.TagResponseDTO;
 import NoCountry.YouTech.model.Tag;
 import NoCountry.YouTech.service.ITag;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,6 @@ public class TagController {
     private final ITag service;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Tag>> getAll() { return ResponseEntity.status(OK).body(service.getAllTags());
+    public ResponseEntity<List<TagResponseDTO>> getAll() { return ResponseEntity.status(OK).body(service.getAllTags());
     }
 }
