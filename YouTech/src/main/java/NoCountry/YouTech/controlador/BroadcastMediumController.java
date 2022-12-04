@@ -19,9 +19,9 @@ public class BroadcastMediumController {
 
     private final IContentCreator service;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<?> registerBroadcastMedium(Principal principal, @RequestBody BroadcastMediumRequestDTO dto, Integer id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveBroadcastMedium(principal.getName(), dto, id));
+    @PostMapping
+    public ResponseEntity<?> registerBroadcastMedium(Principal principal, @RequestBody BroadcastMediumRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveBroadcastMedium(principal.getName(),dto));
     }
 
 }

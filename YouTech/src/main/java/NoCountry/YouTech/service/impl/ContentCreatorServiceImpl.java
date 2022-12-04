@@ -34,7 +34,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final MessageSource messageSource;
 
 
-    public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto, Integer id) {
+    public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
@@ -46,20 +46,11 @@ public class ContentCreatorServiceImpl implements IContentCreator {
             throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
         }*/
 
-        ContentCreator updatedContentCreator = mapper.map(dto, ContentCreator.class);
-        updatedContentCreator.setIdContentCreator(getContentCreatorById(id).getIdContentCreator());
-        updatedContentCreator = creatorRepository.save(updatedContentCreator);
+        ContentCreator updatedContentCreator = user.getContentCreator();
+        updatedContentCreator.update(dto);
+        creatorRepository.save(updatedContentCreator);
         return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
     }
-
-    private ContentCreator getContentCreatorById(Integer id) {
-        Optional<ContentCreator> entity = this.creatorRepository.findById(id);
-        if (entity.isEmpty()) {
-            throw new NotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
-        }
-        return entity.get();
-    }
-
 
     public ContentCreator getById(Integer id) {
         return creatorRepository.findById(id).orElseThrow(
@@ -76,18 +67,15 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
     }
 
-    public BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto, Integer id) {
+    public BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
         );
-        ContentCreator creator = getById(id);
-        if (creator.getIdContentCreator() != user.getIdUser().intValue()) {
-            throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
-        }
+        ContentCreator creator = user.getContentCreator();
+
         BroadcastMedium entity = mapper.map(dto, BroadcastMedium.class);
-        entity.setIdContentCreator(creator);
-        entity = broadcastMediumRepository.save(entity);
+        broadcastMediumRepository.save(entity);
         return mapper.map(entity, BroadcastMediumResponseDTO.class);
     }
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface IContentCreator {
 
-    ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto, Integer id) ;
+    ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) ;
     List<ContentCreatorResponseDTO> getAllContentCreators();
     ContentCreator getById(Integer id);
-    BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto, Integer id);
+    BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto);
 }

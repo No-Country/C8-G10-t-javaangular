@@ -21,9 +21,9 @@ public class ContentCreatorController {
 
     private final IContentCreator service;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto, @PathVariable Integer id) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(principal.getName(), dto, id));
+    @PostMapping
+    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(principal.getName(), dto));
     }
 
     @GetMapping("/all")

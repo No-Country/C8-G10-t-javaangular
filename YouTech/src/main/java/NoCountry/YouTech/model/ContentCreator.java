@@ -5,6 +5,8 @@
  */
 package NoCountry.YouTech.model;
 
+import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -194,4 +196,13 @@ public class ContentCreator implements Serializable {
         return "NoCountry.YouTech.model.ContentCreator[ idContentCreator=" + idContentCreator + " ]";
     }
 
+    public void update(ContentCreator2UpdateDTO dto) {
+        this.setName(dto.getName());
+        this.setImageProfile(dto.getImageProfile());
+        this.setLastName(dto.getLastName());
+        this.setIdPseudonym(dto.getIdPseudonym());
+        this.setUrlGithub(dto.getUrlGithub());
+        this.setUrlLinkedin(dto.getUrlLinkedin());
+        this.setUrlTwitter(dto.getUrlTwitter());
+    }
 }
