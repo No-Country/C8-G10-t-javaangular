@@ -19,17 +19,18 @@ import java.io.IOException;
 public class JwtExceptionFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        response.setCharacterEncoding("utf-8");
-        response.setStatus(HttpStatus.FORBIDDEN.value());
+
         try {
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
             request.setAttribute("exception", JwtError.EXPIRED_TOKEN);
+            throw e;
         } catch (MalformedJwtException e) {
             request.setAttribute("exception", JwtError.WRONG_TYPE_TOKEN);
+            throw e;
         } catch (SignatureException e) {
             request.setAttribute("exception", JwtError.WRONG_TYPE_TOKEN);
+            throw e;
         }
-//        filterChain.doFilter(request, response);
     }
 }
