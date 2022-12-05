@@ -16,6 +16,7 @@ import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final GenericMapper mapper;
     private final MessageSource messageSource;
 
-
+    @Transactional
     public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
@@ -69,6 +70,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
     }
 
+    @Transactional
     public String saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
@@ -89,6 +91,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
 
         broadcastMedium.setBroadcastMediumTagList(listTags);
         broadcastMediumRepository.save(broadcastMedium);
-        return messageSource.getMessage("info-positive",null, Locale.US);
+
+        return messageSource.getMessage("info-positive", null, Locale.US);
     }
 }
