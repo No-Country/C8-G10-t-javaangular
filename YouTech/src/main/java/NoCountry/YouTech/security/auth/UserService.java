@@ -1,5 +1,6 @@
 package NoCountry.YouTech.security.auth;
 
+import NoCountry.YouTech.Projection.IPContentCreator;
 import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
 import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.auth.RegisterResponseDTO;
@@ -14,14 +15,12 @@ import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
 
 import NoCountry.YouTech.security.jwt.JwtUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,10 +79,9 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
 
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getEmail());
-            Optional<User> userCheck = repository.findByEmail(dto.getEmail());
-
-            final String jwt = jwtUtils.generateToken(new JwtDTO(userDetails.getUsername(), userCheck.get().getIsAdmin()));
+            userDetailsService.loadUserByUsername(dto.getEmail());
+            IPContentCreator ipContentCreator = creatorRepository.findByEmail(dto.getEmail());
+            final String jwt = jwtUtils.generateToken(mapper.map(ipContentCreator, JwtDTO.class));
 
             return new AuthenticationResponseDTO(jwt);
         } else {

@@ -1,11 +1,13 @@
 package NoCountry.YouTech.repository;
 
+import NoCountry.YouTech.Projection.IPContentCreator;
 import NoCountry.YouTech.model.ContentCreator;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ContentCreatorRepository extends JpaRepository <ContentCreator, Integer> {
-
+public interface ContentCreatorRepository extends JpaRepository<ContentCreator, Integer> {
+    @Query("SELECT user.email as email, c.name as name,c.lastName as lastName,user.isAdmin as isAdmin FROM ContentCreator c JOIN c.idUser user WHERE user.email=:email")
+    IPContentCreator findByEmail(String email);
 }
