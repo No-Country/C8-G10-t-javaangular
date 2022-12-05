@@ -13,5 +13,5 @@ public interface IContentCreator {
     ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) ;
     List<ContentCreatorResponseDTO> getAllContentCreators();
     ContentCreator getById(Integer id);
-    BroadcastMediumResponseDTO saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto);
+    String saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto);
 }

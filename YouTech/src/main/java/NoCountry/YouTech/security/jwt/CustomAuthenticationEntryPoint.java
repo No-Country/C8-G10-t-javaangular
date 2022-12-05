@@ -21,7 +21,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         } else {
             exception = (String) attribute;
         }
-
         if (exception == null) {
             setResponse(response, JwtError.UNKNOWN_ERROR);
         } else if (exception.equals(JwtError.WRONG_TYPE_TOKEN)) {

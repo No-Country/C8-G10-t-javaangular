@@ -66,6 +66,7 @@ public class BroadcastMedium implements Serializable {
     @JoinColumn(name = "id_content_creator", referencedColumnName = "id_content_creator")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ContentCreator idContentCreator;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBroadcastMedium", fetch = FetchType.LAZY)
     private List<BroadcastMediumTag> broadcastMediumTagList;
 
