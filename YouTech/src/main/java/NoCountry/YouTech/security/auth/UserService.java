@@ -3,6 +3,7 @@ package NoCountry.YouTech.security.auth;
 import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
 import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.auth.RegisterResponseDTO;
+import NoCountry.YouTech.dto.jwt.JwtDTO;
 import NoCountry.YouTech.dto.user.UserRequestDTO;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.model.User;
@@ -13,6 +14,7 @@ import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
 
 import NoCountry.YouTech.security.jwt.JwtUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -22,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
 import java.util.Optional;
@@ -46,6 +49,7 @@ public class UserService {
 
     private final CustomDetailsService userDetailsService;
 
+    @Transactional
     public RegisterResponseDTO save(UserRequestDTO dto) {
         Optional<User> userCheck = repository.findByEmail(dto.getEmail());
         if (userCheck.isPresent())
@@ -75,8 +79,11 @@ public class UserService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+
             final UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getEmail());
-            final String jwt = jwtUtils.generateToken(userDetails);
+            Optional<User> userCheck = repository.findByEmail(dto.getEmail());
+
+            final String jwt = jwtUtils.generateToken(new JwtDTO(userDetails.getUsername(), userCheck.get().getIsAdmin()));
 
             return new AuthenticationResponseDTO(jwt);
         } else {
