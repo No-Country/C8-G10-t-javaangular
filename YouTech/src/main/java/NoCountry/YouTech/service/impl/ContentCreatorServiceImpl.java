@@ -89,7 +89,6 @@ public class ContentCreatorServiceImpl implements IContentCreator {
 
         broadcastMedium.setBroadcastMediumTagList(listTags);
         broadcastMediumRepository.save(broadcastMedium);
-//        return messageSource.getMessage("info-positive",null, Locale.US);
-        return "Success";
+        return messageSource.getMessage("info-positive",null, Locale.US);
     }
 }
