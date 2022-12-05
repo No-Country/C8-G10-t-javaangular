@@ -8,13 +8,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class JwtDTO {
     String email;
     String name;
     String lastName;
-    boolean isAdmin;
+    boolean admin;
 
 
 }
