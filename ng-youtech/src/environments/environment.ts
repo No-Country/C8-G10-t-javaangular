@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'https://c8-g10-t-javaangular-production.up.railway.app',
+  host: 'http://localhost:8080',
 };
 
 /*

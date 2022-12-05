@@ -1,0 +1,57 @@
+@use "../../../../assets/theme/colors.scss";
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+
+  .content {
+    display: flex;
+    padding: 0;
+    border-radius: 1em;
+
+    .form {
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+
+      .container-photo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1em;
+
+        .upload-photo {
+          border-radius: 50%;
+          width: 122px;
+          height: 122px;
+          background-color: #6c6c6c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          .material-icons {
+            color: colors.$accent-color;
+          }
+        }
+      }
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: colors.$background-black-color;
+      border-bottom-right-radius: 1em;
+      border-top-right-radius: 1em;
+
+      padding: 1.5em;
+
+      &__title {
+        font-weight: bolder;
+      }
+      &__image {
+      }
+    }
+  }
+}

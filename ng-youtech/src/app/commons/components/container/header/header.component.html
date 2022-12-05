@@ -4,12 +4,16 @@
   <section class="actions">
     <ng-container *ngIf="isLoggedIn; else default">
       <app-avatar></app-avatar>
-      <span class="actions__message">Hola, Miguel Ángel Duran García</span>
-      <button mat-flat-button color="primary">Cerrar sesión</button>
+      <span class="actions__message">Hola {{ dataUser?.fullName }}</span>
+      <button mat-flat-button color="primary" (click)="clickCloseSession()">
+        Cerrar sesión
+      </button>
     </ng-container>
 
     <ng-template #default>
-      <button mat-button color="primary">Regístrate</button>
+      <button mat-button color="primary" [routerLink]="PATH_REGISTER">
+        Regístrate
+      </button>
       <button mat-flat-button color="primary" [matMenuTriggerFor]="menu">
         Iniciar sesión
       </button>

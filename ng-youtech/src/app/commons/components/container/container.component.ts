@@ -8,7 +8,7 @@ import { RouteService } from '../../services/local/route.service';
 })
 export class ContainerComponent implements OnInit {
   showBannerHome = false;
-  isAdmin = true;
+  isAdmin = false;
   constructor(private _routerService: RouteService) {
     this._validHomePath();
   }
@@ -17,8 +17,6 @@ export class ContainerComponent implements OnInit {
 
   private _validHomePath() {
     this._routerService.navigationEnd().subscribe((navigation) => {
-      console.log(navigation.url);
-
       this.showBannerHome = navigation.url === '/';
     });
   }

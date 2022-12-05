@@ -5,8 +5,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
-import { IResponseContentCreatorHome } from '../../../commons/services/home/home-api.interface';
-import { HomeApiService } from '../../../commons/services/home/home-api.service';
+import { IResponseContentCreatorHome } from '../../../commons/services/api/home/home-api.interface';
+import { HomeApiService } from '../../../commons/services/api/home/home-api.service';
 import { CreatorContentDetailComponent } from './components/creator-content-detail/creator-content-detail.component';
 @Component({
   selector: 'app-home-flow',
@@ -36,7 +36,7 @@ export class HomeFlowComponent implements OnInit {
   listContentCreator: IResponseContentCreatorHome[] = [];
   ngOnInit(): void {
     this._homeApiService.getAllContentCreator().subscribe((response) => {
-      this.listContentCreator = response;
+      // this.listContentCreator = response;
     });
   }
 
