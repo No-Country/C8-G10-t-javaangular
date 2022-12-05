@@ -36,7 +36,7 @@ export class HomeFlowComponent implements OnInit {
   listContentCreator: IResponseContentCreatorHome[] = [];
   ngOnInit(): void {
     this._homeApiService.getAllContentCreator().subscribe((response) => {
-      // this.listContentCreator = response;
+      this.listContentCreator = response.data;
     });
   }
 

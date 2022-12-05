@@ -25,7 +25,7 @@ export class LoginFlowComponent {
   ) {}
 
   form = this._formBuilder.nonNullable.group({
-    email: ['jimmyhdolores@gmail.com', [Validators.email, Validators.required]],
+    email: ['midudev@gmail.com', [Validators.email, Validators.required]],
     password: ['123', Validators.required],
   });
 
@@ -50,6 +50,7 @@ export class LoginFlowComponent {
     );
 
     this._headerChannelService.showUser();
+    console.log(this._dataUserService.getDataUser());
 
     this._router.navigateByUrl(
       this._dataUserService.getDataUser()?.isAdmin

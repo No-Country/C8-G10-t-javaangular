@@ -18,7 +18,7 @@ export class DataUserService {
       if (jwtDecode) {
         this._dataUser = {
           fullName: `${jwtDecode.name}, ${jwtDecode.lastName}`,
-          isAdmin: jwtDecode.isAdmin,
+          isAdmin: jwtDecode.admin,
         };
       }
     }

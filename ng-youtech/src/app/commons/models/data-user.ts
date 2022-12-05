@@ -7,5 +7,5 @@ export interface IJwtDecode {
   email: string;
   name: string;
   lastName: string;
-  isAdmin: boolean;
+  admin: boolean;
 }
