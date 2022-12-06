@@ -52,4 +52,13 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         }
         return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
     }
+
+    public List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags) {
+        System.out.println(" name ---: " + name);
+        System.out.println(" response ---: " + creatorRepository.findByName(name));
+        List<ContentCreatorResponseDTO> creators =creatorRepository.findLikeLastName(name);
+        System.out.println(" list ---: " + creators);
+        return null;
+    }
+
 }

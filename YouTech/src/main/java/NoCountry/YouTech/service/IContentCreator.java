@@ -9,4 +9,5 @@ public interface IContentCreator {
 
     ContentCreatorResponseDTO update(ContentCreator2UpdateDTO dto, Long id);
     List<ContentCreatorResponseDTO> getAllContentCreators();
+    List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags);
 }

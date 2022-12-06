@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -28,6 +29,10 @@ public class ContentCreatorController {
     public ResponseEntity<List<ContentCreatorResponseDTO>> getAll() { return ResponseEntity.status(OK).body(service.getAllContentCreators());
     }
 
-
+    @GetMapping("/find")
+    public ResponseEntity<List<ContentCreatorResponseDTO>> find(@RequestBody Map<String, String> body) {
+        String name = body.get("name");
+        return ResponseEntity.status(OK).body(service.findContentCreators(name, null));
+    }
 
 }
