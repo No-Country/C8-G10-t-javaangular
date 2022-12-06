@@ -81,7 +81,7 @@ public class UserService {
 
             userDetailsService.loadUserByUsername(dto.getEmail());
             IPContentCreator ipContentCreator = creatorRepository.findByEmail(dto.getEmail());
-            JwtDTO jwtDTO= new JwtDTO(ipContentCreator.getEmail(),ipContentCreator.getName(),ipContentCreator.getLastName(),ipContentCreator.getIsAdmin());
+            JwtDTO jwtDTO = new JwtDTO(ipContentCreator.getIdContentCreator(), ipContentCreator.getEmail(), ipContentCreator.getName(), ipContentCreator.getLastName(), ipContentCreator.getImageProfile(), ipContentCreator.getIsAdmin());
             final String jwt = jwtUtils.generateToken(jwtDTO);
 
             return new AuthenticationResponseDTO(jwt);

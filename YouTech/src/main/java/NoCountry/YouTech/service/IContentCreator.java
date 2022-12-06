@@ -1,5 +1,6 @@
 package NoCountry.YouTech.service;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
@@ -14,8 +15,10 @@ public interface IContentCreator {
 
     List<ContentCreatorResponseDTO> getAllContentCreators();
 
-    ContentCreator getById(Integer id);
+    ContentCreatorResponseDTO getById(Integer id);
 
     String saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto);
+
+    List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator);
 
 }

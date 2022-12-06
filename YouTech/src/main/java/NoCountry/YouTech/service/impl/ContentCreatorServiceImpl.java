@@ -1,7 +1,7 @@
 package NoCountry.YouTech.service.impl;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
-import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.model.*;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -55,11 +54,14 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
     }
 
-    public ContentCreator getById(Integer id) {
-        return creatorRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(
-                        messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US))
-        );
+    public ContentCreatorResponseDTO getById(Integer id) {
+        Optional<ContentCreator> contentCreator = creatorRepository.findById(id);
+        if (!contentCreator.isPresent()) {
+            new NotFoundException(
+                    messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
+        }
+        return mapper.map(contentCreator.get(), ContentCreatorResponseDTO.class);
+
     }
 
     public List<ContentCreatorResponseDTO> getAllContentCreators() {
@@ -93,6 +95,28 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         broadcastMediumRepository.save(broadcastMedium);
 
         return messageSource.getMessage("info-positive", null, Locale.US);
+    }
+
+    @Override
+    public List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator) {
+        List<BroadcastMedium> broadcastMediumList = broadcastMediumRepository.getAllBroadcastMedium(idContentCreator);
+        if (broadcastMediumList.isEmpty()) {
+            throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
+        }
+
+        return broadcastMediumList.stream().map((item) -> {
+
+            List<BroadcastMediumContentCreatorResponseDTO.broadcastMediumTagList> broadcastMediumBroadcastMediumTagListList =
+                    item.getBroadcastMediumTagList().stream().limit(5).map(
+                                    (itemMediumTag) -> new BroadcastMediumContentCreatorResponseDTO.broadcastMediumTagList(itemMediumTag.getIdTag().getIdTag(), itemMediumTag.getIdTag().getDescription()))
+                            .collect(Collectors.toList());
+
+            BroadcastMediumContentCreatorResponseDTO broadcastMediumContentCreatorResponseDTO =
+                    new BroadcastMediumContentCreatorResponseDTO(
+                            item.getIdBroadcastMedium(), item.getUrImage(), item.getName(), item.getIdBroadcastType().getIdBroadcastType(), item.getIdBroadcastType().getDescription(), item.getUrl(), broadcastMediumBroadcastMediumTagListList);
+
+            return broadcastMediumContentCreatorResponseDTO;
+        }).collect(Collectors.toList());
     }
 
 

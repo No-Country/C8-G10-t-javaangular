@@ -6,10 +6,7 @@ import NoCountry.YouTech.util.CustomResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -23,7 +20,10 @@ public class BroadcastMediumController {
     @PostMapping
     public ResponseEntity<?> registerBroadcastMedium(Principal principal, @RequestBody BroadcastMediumRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.saveBroadcastMedium(principal.getName(), dto));
-
     }
 
+    @GetMapping("/{idContentCreator}")
+    public ResponseEntity<?> getAllBroadcastMedium(@PathVariable Integer idContentCreator) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.getAllBroadcastMedium(idContentCreator));
+    }
 }

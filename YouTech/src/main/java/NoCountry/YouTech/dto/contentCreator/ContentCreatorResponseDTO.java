@@ -16,6 +16,6 @@ public class ContentCreatorResponseDTO {
     private String urlGithub;
     private String urlTwitter;
     private String urlLinkedin;
-    private String idPseudonym;
+    private String pseudonym;
     private String imageProfile;
 }

@@ -10,9 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class JwtDTO {
+    Integer idContentCreator;
     String email;
     String name;
     String lastName;
+    String urlImage;
     boolean admin;
 
 
