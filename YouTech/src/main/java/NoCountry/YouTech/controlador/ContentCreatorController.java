@@ -31,7 +31,7 @@ public class ContentCreatorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContentCreatorResponseDTO> getById(@PathVariable Integer id) {
+    public ResponseEntity<ContentCreatorResponseDTO> getById(Principal principal,@PathVariable Integer id) {
         return ResponseEntity.status(OK).body(service.getById(id));
     }
 

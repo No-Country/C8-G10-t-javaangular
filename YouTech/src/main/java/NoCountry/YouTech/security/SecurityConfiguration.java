@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .cors()
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and().sessionManagement().
