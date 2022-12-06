@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Util {
     public static final ObjectMapper OBJECT_STATIC = new ObjectMapper();
+    public static final short STATUS_ACTIVE = 1;
+    public static final short STATUS_INACTIVE = 0;
 
     public static String castToString(Object data) {
         try {

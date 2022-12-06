@@ -1,8 +1,9 @@
 package NoCountry.YouTech.controlador;
 
-import NoCountry.YouTech.dto.tag.TagResponseDTO;
-import NoCountry.YouTech.model.Tag;
-import NoCountry.YouTech.service.ITag;
+import NoCountry.YouTech.dto.broadCastType.BroadCastTypeDTO;
+import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
+import NoCountry.YouTech.service.IBroadCastType;
+import NoCountry.YouTech.service.IContentCreator;
 import NoCountry.YouTech.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,14 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/tag")
+@RequestMapping("/broadcast-type")
 @RequiredArgsConstructor
-public class TagController {
+public class BroadCastTypeController {
 
-    private final ITag service;
+    private final IBroadCastType service;
 
     @GetMapping("/actives")
-    public ResponseEntity<List<TagResponseDTO>> getAll() {
-        return ResponseEntity.status(OK).body(service.getAllTags(Util.STATUS_ACTIVE));
+    public ResponseEntity<List<BroadCastTypeDTO>> getAll() {
+        return ResponseEntity.status(OK).body(service.getBroadCastTypeActive(Util.STATUS_ACTIVE));
     }
 }

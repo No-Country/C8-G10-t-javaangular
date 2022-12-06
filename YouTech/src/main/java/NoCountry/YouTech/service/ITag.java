@@ -6,5 +6,5 @@ import NoCountry.YouTech.model.Tag;
 import java.util.List;
 
 public interface ITag {
-    List<TagResponseDTO> getAllTags();
+    List<TagResponseDTO> getAllTags(short status);
 }

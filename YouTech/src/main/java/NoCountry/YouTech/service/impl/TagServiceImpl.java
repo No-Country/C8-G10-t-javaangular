@@ -24,8 +24,8 @@ public class TagServiceImpl implements ITag {
     private final MessageSource messageSource;
     private final GenericMapper mapper;
 
-    public List<TagResponseDTO> getAllTags() {
-        List<Tag> tags = repository.findAll();
+    public List<TagResponseDTO> getAllTags(short status) {
+        List<Tag> tags = repository.findByStatus(status);
         if (tags.isEmpty()) {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
