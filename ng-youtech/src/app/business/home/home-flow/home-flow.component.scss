@@ -1,33 +1,40 @@
-@use "../../../../assets/theme/colors.scss";
+@use '../../../../assets/theme/colors.scss';
 ::ng-deep {
-  .mat-dialog-container {
-    padding: 0 !important;
-  }
-  mat-tab-body {
-    height: calc(100% + 5%);
-  }
+	.mat-dialog-container {
+		padding: 0 !important;
+	}
+	mat-tab-body {
+		height: calc(100% + 5%);
+	}
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-  .filters {
-    display: flex;
-    gap: 3em;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5em;
+	.filters {
+		display: flex;
+		gap: 3em;
 
-    mat-form-field {
-      width: 100%;
-    }
+		mat-form-field {
+			width: 100%;
+		}
 
-    mat-hint {
-      font-size: 16px;
-    }
-  }
+		mat-hint {
+			font-size: 16px;
+		}
+	}
 
-  .actions {
-    &__button-clear {
-      margin-left: 1em;
-    }
-  }
+	.actions {
+		&__button-clear {
+			margin-left: 1em;
+		}
+	}
+
+	.content-creatores {
+		display: inline-flex;
+		gap: 1em;
+		flex-wrap: wrap;
+		// justify-content: center;
+	}
 }

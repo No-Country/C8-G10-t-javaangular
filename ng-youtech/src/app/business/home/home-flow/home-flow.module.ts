@@ -9,25 +9,25 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { CardHomeCreatorContentModule } from '../../../commons/components/card-home-creator-content/card-home-creator-content.module';
+import { CardHomeCreatorContentModule } from './components/card-home-creator-content/card-home-creator-content.module';
 import { HomeFlowComponent } from './home-flow.component';
 
 @NgModule({
-  declarations: [HomeFlowComponent],
-  imports: [
-    CommonModule,
-    MatInputModule,
-    MatChipsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CardHomeCreatorContentModule,
-    MatDialogModule,
-  ],
-  exports: [HomeFlowComponent],
+	declarations: [HomeFlowComponent],
+	imports: [
+		CommonModule,
+		MatInputModule,
+		MatChipsModule,
+		MatButtonModule,
+		MatCardModule,
+		MatIconModule,
+		MatFormFieldModule,
+		MatAutocompleteModule,
+		FormsModule,
+		ReactiveFormsModule,
+		CardHomeCreatorContentModule,
+		MatDialogModule
+	],
+	exports: [HomeFlowComponent]
 })
 export class HomeFlowModule {}

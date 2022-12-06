@@ -1,7 +1,8 @@
 <img
-  class="image"
-  src="assets/images/midudev.jpg"
-  alt="avatar"
-  [width]="width"
-  [height]="width"
+	class="image"
+	[src]="pathImage ? pathImage : 'assets/images/midudev.jpg'"
+	alt="avatar"
+	[width]="width"
+	[height]="width"
+	[ngStyle]="{ cursor: activeCursor ? 'pointer' : '' }"
 />

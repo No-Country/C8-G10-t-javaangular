@@ -1,11 +1,15 @@
 export interface IDataUser {
-  fullName: string;
-  isAdmin: boolean;
+	idContentCreator: number;
+	urlImage: string;
+	fullName: string;
+	isAdmin: boolean;
 }
 
 export interface IJwtDecode {
-  email: string;
-  name: string;
-  lastName: string;
-  admin: boolean;
+	idContentCreator: number;
+	email: string;
+	name: string;
+	lastName: string;
+	urlImage: string;
+	admin: boolean;
 }

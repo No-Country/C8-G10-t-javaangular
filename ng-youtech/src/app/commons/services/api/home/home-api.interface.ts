@@ -1,9 +1,10 @@
 export interface IResponseContentCreatorHome {
-  name: string;
-  lastName: string;
-  urlGithub?: string;
-  urlTwitter?: string;
-  urlLinkedin?: string;
-  idPseudonym: string;
-  imageProfile: string;
+	idContentCreator: number;
+	name: string;
+	lastName: string;
+	urlGithub?: string;
+	urlTwitter?: string;
+	urlLinkedin?: string;
+	idPseudonym?: string;
+	imageProfile: string;
 }

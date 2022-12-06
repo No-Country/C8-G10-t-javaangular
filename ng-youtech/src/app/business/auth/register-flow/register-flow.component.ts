@@ -1,15 +1,112 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { KEY_SESSION_STORAGE } from '../../../commons/keys-storage/session-storage.enum';
+import { PathWeb } from '../../../commons/routes/path-web';
+import { IRequestRegister, IResponseRegister } from '../../../commons/services/api/auth/auth-api.interface';
+import { HeaderChannelService } from '../../../commons/services/local/channel/header-channel.service';
+import { FireStorageService } from '../../../commons/services/local/fire-storage/fire-storage.service';
+import { SessionStorageService } from '../../../commons/services/local/storage/storage.service';
+import { ToastService } from '../../../commons/services/local/toast.service';
+import { AuthApiService } from './../../../commons/services/api/auth/auth-api.service';
+import { crossPasswordMatchingValidatior, PasswordStateMatcher } from './register-custom-validators';
 
 @Component({
-  selector: 'app-register-flow',
-  templateUrl: './register-flow.component.html',
-  styleUrls: ['./register-flow.component.scss']
+	selector: 'app-register-flow',
+	templateUrl: './register-flow.component.html',
+	styleUrls: ['./register-flow.component.scss']
 })
-export class RegisterFlowComponent implements OnInit {
+export class RegisterFlowComponent {
+	private _fileSelected!: File;
 
-  constructor() { }
+	imageSrc!: string;
+	passwordStateMatcher = new PasswordStateMatcher();
+	disabledButton = false;
 
-  ngOnInit(): void {
-  }
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _authApiService: AuthApiService,
+		private _fireStorageService: FireStorageService,
+		private _sessionStorageService: SessionStorageService,
+		private _router: Router,
+		private _headerChannelService: HeaderChannelService,
+		private _toastService: ToastService
+	) {}
 
+	formGroup = this._formBuilder.nonNullable.group(
+		{
+			name: ['', Validators.required],
+			lastName: ['', Validators.required],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', Validators.required],
+			confirmPassword: ['', Validators.required]
+		},
+		{
+			validators: crossPasswordMatchingValidatior
+		}
+	);
+
+	async clickRegister(): Promise<void> {
+		console.log(this.confirmPasswordField.errors);
+
+		if (this.formGroup.valid) {
+			const url = await this._fireStorageService.saveImage(this._fileSelected);
+			const request = this._getRequest(url);
+			this._authApiService.register(request).subscribe((response) => {
+				if (response.success) {
+					this._saveTokenAndRedirect(response.data);
+				}
+			});
+		}
+	}
+
+	private _saveTokenAndRedirect(response: IResponseRegister) {
+		this._toastService.toastNotification('Felicidades', 'Gracias por compartir tu contenido', {
+			toastPosition: ToastPositionEnum.TOP_FULL_WIDTH
+		});
+
+		this._sessionStorageService.setItem(KEY_SESSION_STORAGE.TOKEN, response.token);
+		this._headerChannelService.showUser();
+		this._router.navigateByUrl(PathWeb.CONTENT_CREATOR.pathWithSlash);
+	}
+
+	private _getRequest(imageProfile: string): IRequestRegister {
+		const request = this.formGroup.getRawValue();
+		return { ...request, imageProfile };
+	}
+
+	onFileSelected(event: Event): void {
+		const htmlInput: HTMLInputElement = event.target as HTMLInputElement;
+		if (htmlInput && htmlInput.files && htmlInput.files.length > 0) {
+			const reader = new FileReader();
+			const file = htmlInput.files[0];
+			this._fileSelected = file;
+
+			reader.readAsDataURL(htmlInput.files[0]);
+			reader.onload = () => {
+				this.imageSrc = reader.result as string;
+			};
+		}
+	}
+
+	get firtsField(): FormControl<string> {
+		return this.formGroup.controls.name;
+	}
+
+	get lastNameField(): FormControl<string> {
+		return this.formGroup.controls.lastName;
+	}
+
+	get emailField(): FormControl<string> {
+		return this.formGroup.controls.email;
+	}
+
+	get passwordField(): FormControl<string> {
+		return this.formGroup.controls.password;
+	}
+
+	get confirmPasswordField(): FormControl<string> {
+		return this.formGroup.controls.confirmPassword;
+	}
 }
