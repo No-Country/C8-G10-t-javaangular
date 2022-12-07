@@ -1,35 +1,111 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import { ConfirmBoxEvokeService } from '@costlydeveloper/ngx-awesome-popup';
+import { EMPTY } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+import { IRequestSaveTag, IResponseTagsAll } from '../../../commons/services/api/maintenance/maintenance-api.interface';
+import { ToastService } from '../../../commons/services/local/toast.service';
+import { MaintenanceApiService } from './../../../commons/services/api/maintenance/maintenance-api.service';
+import { STATUS } from './../../../commons/util/variable';
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 @Component({
-  selector: 'app-maintenance-tag-flow',
-  templateUrl: './maintenance-tag-flow.component.html',
-  styleUrls: ['./maintenance-tag-flow.component.scss'],
+	selector: 'app-maintenance-tag-flow',
+	templateUrl: './maintenance-tag-flow.component.html',
+	styleUrls: ['./maintenance-tag-flow.component.scss']
 })
-export class MaintenanceTagFlowComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class MaintenanceTagFlowComponent implements OnInit, AfterViewInit {
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+	displayedColumns: string[] = ['nro', 'description', 'status'];
+	dataSource = new MatTableDataSource<IResponseTagsAll>();
+
+	constructor(
+		private _maintenanceApiService: MaintenanceApiService,
+		private _formBuilder: FormBuilder,
+		private _confirmBoxEvokeService: ConfirmBoxEvokeService,
+		private _toastService: ToastService
+	) {}
+
+	formGroup = this._formBuilder.nonNullable.group({
+		idTag: undefined,
+		description: ['', Validators.required],
+		status: [false, Validators.required]
+	});
+
+	ngAfterViewInit(): void {
+		this.dataSource.paginator = this.paginator;
+	}
+
+	ngOnInit(): void {
+		this._loadTags();
+	}
+
+	private _loadTags() {
+		this._maintenanceApiService.getTags().subscribe((response) => {
+			if (response.success) {
+				this.dataSource.data = response.data;
+			}
+		});
+	}
+
+	saveTag(): void {
+		if (this.formGroup.valid) {
+			const request: IRequestSaveTag = <IRequestSaveTag>{
+				description: this.descriptionField.value,
+				status: this.statusField.value ? STATUS.ACTIVE : STATUS.INACTIVE
+			};
+
+			if (this.idField.value) {
+				request.idTag = this.idField.value as number;
+			}
+
+			this._confirmBoxEvokeService
+				.warning('Confirmar transacción', 'Esta seguro de guardar la información?', 'Si', 'Cancelar')
+				.pipe(
+					concatMap((question) => {
+						if (question.success) {
+							return this._maintenanceApiService.saveTag(request);
+						}
+						return EMPTY;
+					})
+				)
+				.subscribe((response) => {
+					if (response.success) {
+						this._toastService.success('Transacción completada', 'Se guardo el registro');
+						this._loadTags();
+					}
+				});
+		}
+	}
+
+	cleanForm(): void {
+		this.formGroup.reset();
+	}
+
+	selectedRow(item: IResponseTagsAll) {
+		this.formGroup.patchValue({
+			idTag: item.idTag,
+			description: item.description,
+			status: item.status === STATUS.ACTIVE
+		});
+	}
+
+	applyFilter(event: Event) {
+		const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
+
+	public get idField() {
+		return this.formGroup.controls.idTag;
+	}
+
+	public get descriptionField(): FormControl<string> {
+		return this.formGroup.controls.description;
+	}
+
+	public get statusField(): FormControl<boolean> {
+		return this.formGroup.controls.status;
+	}
 }
