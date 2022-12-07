@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface IContentCreator {
 
-    ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto);
+    String update(String email, ContentCreator2UpdateDTO dto);
 
     List<ContentCreatorResponseDTO> getAllContentCreators();
 

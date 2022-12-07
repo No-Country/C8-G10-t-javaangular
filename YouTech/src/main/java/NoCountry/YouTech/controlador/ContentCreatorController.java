@@ -24,7 +24,7 @@ public class ContentCreatorController {
     private final IContentCreator service;
 
     @PostMapping
-    public ResponseEntity<ContentCreatorResponseDTO> update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
+    public ResponseEntity update(Principal principal, @RequestBody ContentCreator2UpdateDTO dto) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(principal.getName(), dto));
     }
 

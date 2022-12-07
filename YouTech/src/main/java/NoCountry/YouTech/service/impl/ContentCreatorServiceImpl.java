@@ -1,19 +1,25 @@
 package NoCountry.YouTech.service.impl;
 
+import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
+import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
+import NoCountry.YouTech.dto.jwt.JwtDTO;
 import NoCountry.YouTech.model.*;
 import NoCountry.YouTech.exception.EmptyListException;
 import NoCountry.YouTech.exception.NotFoundException;
 import NoCountry.YouTech.mapper.GenericMapper;
+import NoCountry.YouTech.projection.IPContentCreator;
 import NoCountry.YouTech.projection.IPContentCreatorForEdition;
 import NoCountry.YouTech.repository.BroadcastMediumRepository;
 import NoCountry.YouTech.repository.BroadcastMediumTagRepository;
 import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
+import NoCountry.YouTech.security.auth.UserService;
+import NoCountry.YouTech.security.jwt.JwtUtils;
 import NoCountry.YouTech.service.IContentCreator;
 import NoCountry.YouTech.util.Util;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +41,14 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final ContentCreatorRepository creatorRepository;
     private final UserRepository repository;
     private final BroadcastMediumRepository broadcastMediumRepository;
-    private final BroadcastMediumTagRepository broadcastMediumTagRepository;
     private final GenericMapper mapper;
     private final MessageSource messageSource;
     private final PasswordEncoder passwordEncoder;
 
+    private final JwtUtils jwtUtils;
+
     @Transactional
-    public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) {
+    public String update(String email, ContentCreator2UpdateDTO dto) {
         User user = repository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
@@ -52,19 +59,29 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         if (entity.getIdContentCreator() != user.getIdUser().intValue()) {
             throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
         }*/
+//        User userUpdate = new User();
 
-        if (user.getPassword() != dto.getPassword() || user.getEmail() != dto.getEmail()) {
-            User userUpdate = new User();
-            userUpdate.setIdUser(user.getIdUser());
-            userUpdate.setEmail(dto.getEmail());
-            userUpdate.setPassword(passwordEncoder.encode(dto.getPassword()));
-            repository.save(userUpdate);
+        if (dto.getPassword() != null && user.getPassword() != dto.getPassword()) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
+
+        if (dto.getEmail() != null && user.getEmail() != dto.getEmail()) {
+            user.setEmail(dto.getEmail());
+        }
+
+
+        if (user.getEmail() != null || user.getPassword() != null) {
+            repository.save(user);
         }
 
         ContentCreator updatedContentCreator = user.getContentCreator();
         updatedContentCreator.update(dto);
         creatorRepository.save(updatedContentCreator);
-        return mapper.map(updatedContentCreator, ContentCreatorResponseDTO.class);
+
+        JwtDTO jwtDTO = new JwtDTO(updatedContentCreator.getIdContentCreator(), user.getEmail(), updatedContentCreator.getName(), updatedContentCreator.getLastName(), updatedContentCreator.getImageProfile(), user.getIsAdmin());
+        final String jwt = jwtUtils.generateToken(jwtDTO);
+
+        return jwt;
     }
 
     public ContentCreatorResponseDTO getById(Integer id) {

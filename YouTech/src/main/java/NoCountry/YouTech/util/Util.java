@@ -21,7 +21,7 @@ public class Util {
         try {
             return OBJECT_STATIC.readValue(json, OBJECT_STATIC.getTypeFactory().constructType(Class.forName(target.getName())));
         } catch (Exception exception) {
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             return null;
         }
     }

@@ -28,7 +28,6 @@ import java.io.PrintWriter;
 @RequiredArgsConstructor
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-    //    @Qualifier("handlerExceptionResolver")
 
 
     private final CustomDetailsService customDetailsService;

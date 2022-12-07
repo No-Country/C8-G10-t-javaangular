@@ -210,13 +210,32 @@ public class ContentCreator implements Serializable {
     }
 
     public void update(ContentCreator2UpdateDTO dto) {
-        this.setName(dto.getName());
-        this.setNameImageProfile(dto.getNameImageProfile());
-        this.setImageProfile(dto.getImageProfile());
-        this.setLastName(dto.getLastName());
-        this.setIdPseudonym(dto.getPseudonym());
-        this.setUrlGithub(dto.getUrlGithub());
-        this.setUrlLinkedin(dto.getUrlLinkedin());
-        this.setUrlTwitter(dto.getUrlTwitter());
+
+        if (dto.getName() != null) {
+            this.setName(dto.getName());
+        }
+        if (dto.getNameImageProfile() != null) {
+            this.setNameImageProfile(dto.getNameImageProfile());
+        }
+
+        if (dto.getImageProfile() != null) {
+            this.setImageProfile(dto.getImageProfile());
+        }
+        if (dto.getLastName() != null) {
+            this.setLastName(dto.getLastName());
+        }
+        if (dto.getPseudonym() != null) {
+            this.setIdPseudonym(dto.getPseudonym());
+        }
+        if (dto.getUrlGithub() != null) {
+            this.setUrlGithub(dto.getUrlGithub());
+        }
+        if (dto.getUrlLinkedin() != null) {
+            this.setUrlLinkedin(dto.getUrlLinkedin());
+        }
+        if (dto.getUrlTwitter() != null) {
+            this.setUrlTwitter(dto.getUrlTwitter());
+        }
+
     }
 }

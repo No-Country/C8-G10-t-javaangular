@@ -22,7 +22,6 @@ public class CustomDetailsService implements UserDetailsService {
     private final UserRepository repository;
     private final MessageSource messageSource;
 
-    @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String dataJson) throws UsernameNotFoundException {
         JwtDTO jwtDTO = Util.convertJsonToPOJO(dataJson, JwtDTO.class);

@@ -13,6 +13,7 @@ public class UserRequestDTO {
     private String email;
     private String password;
     private String imageProfile;
+    private String nameImageProfile;
     private String name;
     private String lastName;
 
