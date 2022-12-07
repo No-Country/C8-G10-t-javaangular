@@ -1,6 +1,6 @@
 package NoCountry.YouTech.security.auth;
 
-import NoCountry.YouTech.Projection.IPContentCreator;
+import NoCountry.YouTech.projection.IPContentCreator;
 import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
 import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.auth.RegisterResponseDTO;

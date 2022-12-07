@@ -1,4 +1,4 @@
-package NoCountry.YouTech.Projection;
+package NoCountry.YouTech.projection;
 
 public interface IPContentCreator {
     Integer getIdContentCreator();

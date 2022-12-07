@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BroadcastMediumRequestDTO {
     private String urImage;
+    private String nameImage;
     private String name;
     private String description;
     private String url;

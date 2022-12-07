@@ -4,10 +4,12 @@ import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorRespon
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
+import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
 import NoCountry.YouTech.model.*;
 import NoCountry.YouTech.exception.EmptyListException;
 import NoCountry.YouTech.exception.NotFoundException;
 import NoCountry.YouTech.mapper.GenericMapper;
+import NoCountry.YouTech.projection.IPContentCreatorForEdition;
 import NoCountry.YouTech.repository.BroadcastMediumRepository;
 import NoCountry.YouTech.repository.BroadcastMediumTagRepository;
 import NoCountry.YouTech.repository.ContentCreatorRepository;
@@ -16,6 +18,7 @@ import NoCountry.YouTech.service.IContentCreator;
 import NoCountry.YouTech.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +38,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final BroadcastMediumTagRepository broadcastMediumTagRepository;
     private final GenericMapper mapper;
     private final MessageSource messageSource;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public ContentCreatorResponseDTO update(String email, ContentCreator2UpdateDTO dto) {
@@ -48,6 +52,14 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         if (entity.getIdContentCreator() != user.getIdUser().intValue()) {
             throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
         }*/
+
+        if (user.getPassword() != dto.getPassword() || user.getEmail() != dto.getEmail()) {
+            User userUpdate = new User();
+            userUpdate.setIdUser(user.getIdUser());
+            userUpdate.setEmail(dto.getEmail());
+            userUpdate.setPassword(passwordEncoder.encode(dto.getPassword()));
+            repository.save(userUpdate);
+        }
 
         ContentCreator updatedContentCreator = user.getContentCreator();
         updatedContentCreator.update(dto);
@@ -81,7 +93,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         );
         ContentCreator creator = user.getContentCreator();
         BroadcastMedium broadcastMedium = mapper.map(dto, BroadcastMedium.class);
-        broadcastMedium.setStatus((int)Util.STATUS_ACTIVE);
+        broadcastMedium.setStatus((int) Util.STATUS_ACTIVE);
         broadcastMedium.setIdBroadcastType(new BroadcastType(dto.getIdBroadcastType()));
         broadcastMedium.setIdContentCreator(creator);
 
@@ -124,9 +136,20 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     public List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags) {
         System.out.println(" name ---: " + name);
         System.out.println(" response ---: " + creatorRepository.findLikeName(name));
-        List<ContentCreatorResponseDTO> creators =creatorRepository.findLikeLastName(name);
+        List<ContentCreatorResponseDTO> creators = creatorRepository.findLikeLastName(name);
         System.out.println(" list ---: " + creators);
         return null;
+    }
+
+    @Override
+    public ContentCreatorResponseForEditionDTO getForEdition(Integer idContentCreator) {
+        IPContentCreatorForEdition ipContentCreatorForEdition = creatorRepository.findForEdition(idContentCreator);
+
+        if (ipContentCreatorForEdition == null) {
+            new NotFoundException(
+                    messageSource.getMessage("content-creator-not-found", new Object[]{idContentCreator}, Locale.US));
+        }
+        return mapper.map(ipContentCreatorForEdition, ContentCreatorResponseForEditionDTO.class);
     }
 
 }

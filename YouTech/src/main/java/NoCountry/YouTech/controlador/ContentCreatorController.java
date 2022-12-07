@@ -3,6 +3,7 @@ package NoCountry.YouTech.controlador;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
+import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,11 @@ public class ContentCreatorController {
     @GetMapping("/{id}")
     public ResponseEntity<ContentCreatorResponseDTO> getById(Principal principal,@PathVariable Integer id) {
         return ResponseEntity.status(OK).body(service.getById(id));
+    }
+
+    @GetMapping("/find_for_edition/{id}")
+    public ResponseEntity<ContentCreatorResponseForEditionDTO> getForEdition(@PathVariable Integer id) {
+        return ResponseEntity.status(OK).body(service.getForEdition(id));
     }
 
     @GetMapping("/find")

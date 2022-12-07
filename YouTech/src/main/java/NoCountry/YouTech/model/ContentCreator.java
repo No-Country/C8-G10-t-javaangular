@@ -18,7 +18,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,24 +27,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author Jimy
  */
 @Entity
 @Table(name = "content_creator")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ContentCreator.findAll", query = "SELECT c FROM ContentCreator c")
-    , @NamedQuery(name = "ContentCreator.findByIdContentCreator", query = "SELECT c FROM ContentCreator c WHERE c.idContentCreator = :idContentCreator")
-    , @NamedQuery(name = "ContentCreator.findByName", query = "SELECT c FROM ContentCreator c WHERE c.name = :name")
-    , @NamedQuery(name = "ContentCreator.findByLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName = :lastName")
-    , @NamedQuery(name = "ContentCreator.findLikeName", query = "SELECT c FROM ContentCreator c")
-    , @NamedQuery(name = "ContentCreator.findLikeLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName LIKE CONTACT('%',:lastName,'%')")
-    , @NamedQuery(name = "ContentCreator.findByIdPseudonym", query = "SELECT c FROM ContentCreator c WHERE c.idPseudonym = :idPseudonym")
-    , @NamedQuery(name = "ContentCreator.findByImageProfile", query = "SELECT c FROM ContentCreator c WHERE c.imageProfile = :imageProfile")
-    , @NamedQuery(name = "ContentCreator.findByUrlGithub", query = "SELECT c FROM ContentCreator c WHERE c.urlGithub = :urlGithub")
-    , @NamedQuery(name = "ContentCreator.findByUrlTwitter", query = "SELECT c FROM ContentCreator c WHERE c.urlTwitter = :urlTwitter")
-    , @NamedQuery(name = "ContentCreator.findByUrlLinkedin", query = "SELECT c FROM ContentCreator c WHERE c.urlLinkedin = :urlLinkedin")})
+        @NamedQuery(name = "ContentCreator.findAll", query = "SELECT c FROM ContentCreator c")
+        , @NamedQuery(name = "ContentCreator.findByIdContentCreator", query = "SELECT c FROM ContentCreator c WHERE c.idContentCreator = :idContentCreator")
+        , @NamedQuery(name = "ContentCreator.findByName", query = "SELECT c FROM ContentCreator c WHERE c.name = :name")
+        , @NamedQuery(name = "ContentCreator.findByLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName = :lastName")
+        , @NamedQuery(name = "ContentCreator.findLikeName", query = "SELECT c FROM ContentCreator c")
+        , @NamedQuery(name = "ContentCreator.findLikeLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName LIKE CONTACT('%',:lastName,'%')")
+        , @NamedQuery(name = "ContentCreator.findByIdPseudonym", query = "SELECT c FROM ContentCreator c WHERE c.idPseudonym = :idPseudonym")
+        , @NamedQuery(name = "ContentCreator.findByImageProfile", query = "SELECT c FROM ContentCreator c WHERE c.imageProfile = :imageProfile")
+        , @NamedQuery(name = "ContentCreator.findByUrlGithub", query = "SELECT c FROM ContentCreator c WHERE c.urlGithub = :urlGithub")
+        , @NamedQuery(name = "ContentCreator.findByUrlTwitter", query = "SELECT c FROM ContentCreator c WHERE c.urlTwitter = :urlTwitter")
+        , @NamedQuery(name = "ContentCreator.findByUrlLinkedin", query = "SELECT c FROM ContentCreator c WHERE c.urlLinkedin = :urlLinkedin")})
 public class ContentCreator implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +63,10 @@ public class ContentCreator implements Serializable {
     @Basic(optional = false)
     @Column(name = "image_profile")
     private String imageProfile;
+    @Basic(optional = false)
+    @Column(name = "name_image_profile")
+    private String nameImageProfile;
+
     @Column(name = "url_github")
     private String urlGithub;
     @Column(name = "url_twitter")
@@ -73,7 +75,7 @@ public class ContentCreator implements Serializable {
     private String urlLinkedin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idContentCreator", fetch = FetchType.LAZY)
     private List<BroadcastMedium> broadcastMediumList;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private User idUser;
@@ -85,10 +87,11 @@ public class ContentCreator implements Serializable {
         this.idContentCreator = idContentCreator;
     }
 
-    public ContentCreator(Integer idContentCreator, String name, String lastName, String imageProfile) {
+    public ContentCreator(Integer idContentCreator, String name, String lastName, String nameImageProfile, String imageProfile) {
         this.idContentCreator = idContentCreator;
         this.name = name;
         this.lastName = lastName;
+        this.nameImageProfile = nameImageProfile;
         this.imageProfile = imageProfile;
     }
 
@@ -122,6 +125,14 @@ public class ContentCreator implements Serializable {
 
     public void setIdPseudonym(String idPseudonym) {
         this.idPseudonym = idPseudonym;
+    }
+
+    public String getNameImageProfile() {
+        return nameImageProfile;
+    }
+
+    public void setNameImageProfile(String nameImageProfile) {
+        this.nameImageProfile = nameImageProfile;
     }
 
     public String getImageProfile() {
@@ -200,9 +211,10 @@ public class ContentCreator implements Serializable {
 
     public void update(ContentCreator2UpdateDTO dto) {
         this.setName(dto.getName());
+        this.setNameImageProfile(dto.getNameImageProfile());
         this.setImageProfile(dto.getImageProfile());
         this.setLastName(dto.getLastName());
-        this.setIdPseudonym(dto.getIdPseudonym());
+        this.setIdPseudonym(dto.getPseudonym());
         this.setUrlGithub(dto.getUrlGithub());
         this.setUrlLinkedin(dto.getUrlLinkedin());
         this.setUrlTwitter(dto.getUrlTwitter());

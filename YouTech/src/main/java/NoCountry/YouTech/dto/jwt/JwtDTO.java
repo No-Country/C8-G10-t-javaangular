@@ -1,6 +1,5 @@
 package NoCountry.YouTech.dto.jwt;
 
-import NoCountry.YouTech.Projection.IPContentCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

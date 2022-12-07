@@ -25,20 +25,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author Jimy
  */
 @Entity
 @Table(name = "broadcast_medium")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BroadcastMedium.findAll", query = "SELECT b FROM BroadcastMedium b")
-    , @NamedQuery(name = "BroadcastMedium.findByIdBroadcastMedium", query = "SELECT b FROM BroadcastMedium b WHERE b.idBroadcastMedium = :idBroadcastMedium")
-    , @NamedQuery(name = "BroadcastMedium.findByUrImage", query = "SELECT b FROM BroadcastMedium b WHERE b.urImage = :urImage")
-    , @NamedQuery(name = "BroadcastMedium.findByName", query = "SELECT b FROM BroadcastMedium b WHERE b.name = :name")
-    , @NamedQuery(name = "BroadcastMedium.findByDescription", query = "SELECT b FROM BroadcastMedium b WHERE b.description = :description")
-    , @NamedQuery(name = "BroadcastMedium.findByUrl", query = "SELECT b FROM BroadcastMedium b WHERE b.url = :url")
-    , @NamedQuery(name = "BroadcastMedium.findByStatus", query = "SELECT b FROM BroadcastMedium b WHERE b.status = :status")})
+        @NamedQuery(name = "BroadcastMedium.findAll", query = "SELECT b FROM BroadcastMedium b")
+        , @NamedQuery(name = "BroadcastMedium.findByIdBroadcastMedium", query = "SELECT b FROM BroadcastMedium b WHERE b.idBroadcastMedium = :idBroadcastMedium")
+        , @NamedQuery(name = "BroadcastMedium.findByUrImage", query = "SELECT b FROM BroadcastMedium b WHERE b.urImage = :urImage")
+        , @NamedQuery(name = "BroadcastMedium.findByName", query = "SELECT b FROM BroadcastMedium b WHERE b.name = :name")
+        , @NamedQuery(name = "BroadcastMedium.findByDescription", query = "SELECT b FROM BroadcastMedium b WHERE b.description = :description")
+        , @NamedQuery(name = "BroadcastMedium.findByUrl", query = "SELECT b FROM BroadcastMedium b WHERE b.url = :url")
+        , @NamedQuery(name = "BroadcastMedium.findByStatus", query = "SELECT b FROM BroadcastMedium b WHERE b.status = :status")})
 public class BroadcastMedium implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +49,9 @@ public class BroadcastMedium implements Serializable {
     @Basic(optional = false)
     @Column(name = "ur_image")
     private String urImage;
+    @Basic(optional = false)
+    @Column(name = "name_image")
+    private String nameImage;
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -77,9 +79,10 @@ public class BroadcastMedium implements Serializable {
         this.idBroadcastMedium = idBroadcastMedium;
     }
 
-    public BroadcastMedium(Integer idBroadcastMedium, String urImage, String name, String url) {
+    public BroadcastMedium(Integer idBroadcastMedium, String urImage, String nameImage, String name, String url) {
         this.idBroadcastMedium = idBroadcastMedium;
         this.urImage = urImage;
+        this.nameImage = nameImage;
         this.name = name;
         this.url = url;
     }
@@ -98,6 +101,14 @@ public class BroadcastMedium implements Serializable {
 
     public void setUrImage(String urImage) {
         this.urImage = urImage;
+    }
+
+    public String getNameImage() {
+        return nameImage;
+    }
+
+    public void setNameImage(String nameImage) {
+        this.nameImage = nameImage;
     }
 
     public String getName() {
@@ -181,5 +192,5 @@ public class BroadcastMedium implements Serializable {
     public String toString() {
         return "NoCountry.YouTech.model.BroadcastMedium[ idBroadcastMedium=" + idBroadcastMedium + " ]";
     }
-    
+
 }
