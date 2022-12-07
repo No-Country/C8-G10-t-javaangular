@@ -40,6 +40,7 @@ public class TagServiceImpl implements ITag {
         try{
             Tag updatedTag = mapper.map(dto, Tag.class);
             updatedTag.setIdTag(tag.getIdTag());
+            updatedTag.setStatus((byte)1);
             repository.save(updatedTag);
             return mapper.map(updatedTag, TagResponseDTO.class);
         } catch (Exception E) {
@@ -60,7 +61,8 @@ public class TagServiceImpl implements ITag {
         try{
             Tag tagToDelete = mapper.map(tag, Tag.class);
             tagToDelete.setIdTag(tag.getIdTag());
-            repository.delete(tagToDelete);
+            tagToDelete.setStatus((byte)0);
+            repository.save(tagToDelete);
             return true;
         }catch (Exception E) {
             return false;
