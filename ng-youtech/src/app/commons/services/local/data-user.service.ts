@@ -29,4 +29,8 @@ export class DataUserService {
 		this._sessionStorageService.clear();
 		this._dataUser = undefined;
 	}
+
+	resetDataUser(): void {
+		this._dataUser = undefined;
+	}
 }

@@ -5,10 +5,11 @@ import { EMPTY, Observable } from 'rxjs';
 import { URL_BASE_AUTH } from '../services/api/auth/auth-api.service';
 import { JwtUserService } from './../services/local/jwt-user.service';
 
-import { URL_CONTENT_CREATOR_HOME } from '../services/api/home/home-api.service';
+import { URL_BROADCAST_MEDIUM } from '../services/api/broadcast-medium/broadcast-medium-api.service';
+import { URL_CONTENT_CREATOR_HOME, URL_TAGS_ACTIVES_HOME } from '../services/api/home/home-api.service';
 import { SessionStorageService } from '../services/local/storage/storage.service';
 
-const EXEMPTED_URLS = [URL_BASE_AUTH, URL_CONTENT_CREATOR_HOME];
+const EXEMPTED_URLS = [URL_BASE_AUTH, URL_CONTENT_CREATOR_HOME, URL_TAGS_ACTIVES_HOME, URL_BROADCAST_MEDIUM];
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {

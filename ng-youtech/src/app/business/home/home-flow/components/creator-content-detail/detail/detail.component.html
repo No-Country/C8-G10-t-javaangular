@@ -1,49 +1,37 @@
 <section class="container-detail">
-  <div class="information">
-    <h2>Descripción</h2>
-    <p class="information__description">
-      🧑‍💻 Te enseño a programar y mejorar tu lógica de programación • 🚀 Soy
-      Desarrollador Full Stack JavaScript con 15 años de experiencia • ⭐
-      Reconocido como Google Developer Expert y GitHub Star • ¡Sígueme para no
-      perderte el próximo stream!
-    </p>
-  </div>
+	<div class="information">
+		<h2>Descripción</h2>
+		<p class="information__description">
+			{{ item.description }}
+		</p>
+	</div>
 
-  <div class="creator-content">
-    <app-avatar [width]="200"></app-avatar>
-    <span class="creator-content__title">Encuéntralo como</span>
-    <span class="creator-content__subtitle">midudev</span>
-  </div>
+	<div class="creator-content">
+		<app-avatar [width]="200" [pathImage]="item.urImage"></app-avatar>
+		<span class="creator-content__title">Encuéntralo como</span>
+		<span class="creator-content__subtitle">{{ item.name }}</span>
+	</div>
 </section>
 
 <br />
 
 <section class="container-url">
-  <img
-    class="container-url__image"
-    src="assets/svg/url-search.svg"
-    alt="search"
-  />
-  <div class="link">
-    <h1>Sigue su contenido en el siguiente enlace:</h1>
-    <a
-      mat-flat-button
-      href="https://www.google.com/"
-      color="primary"
-      target="_blank"
-    >
-      <mat-icon>language</mat-icon>
-      midudev</a
-    >
-  </div>
+	<img class="container-url__image" src="assets/svg/url-search.svg" alt="search" />
+
+	<div class="link">
+		<h1>Sigue su contenido en el siguiente enlace:</h1>
+		<a mat-flat-button [href]="item.urlPlatform" color="primary" target="_blank">
+			<mat-icon>language</mat-icon>
+			{{ item.name }}</a
+		>
+	</div>
 </section>
 
 <br />
 
 <section class="container-tags">
-  <h1>¿Qué temas trata?</h1>
-  <mat-chip-list aria-label="Fish selection">
-    <mat-chip color="primary" selected>Primary fish</mat-chip>
-    <mat-chip color="primary" selected>Accent fish</mat-chip>
-  </mat-chip-list>
+	<h1>¿Qué temas trata?</h1>
+	<mat-chip-list aria-label="Fish selection">
+		<mat-chip color="primary" selected *ngFor="let tag of item.tagList">{{ tag.description }} </mat-chip>
+	</mat-chip-list>
 </section>

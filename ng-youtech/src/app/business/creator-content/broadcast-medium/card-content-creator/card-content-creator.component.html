@@ -10,7 +10,7 @@
 
 			<section class="item">
 				<span class="item__title">PLataforma</span>
-				<div class="platform" (click)="goToLink(broadCastMedium.urlPLatform)">
+				<div class="platform" (click)="goToLink(broadCastMedium.urlPlatform)">
 					<img class="platform__image" src="{{ broadCastMedium.idPlatform | broadcastTypeImage }}" />
 					<span class="platform__description">{{ broadCastMedium.platform }}</span>
 				</div>
@@ -30,12 +30,12 @@
 
 		<div class="actions">
 			<div class="circle">
-				<button mat-icon-button color="warn">
+				<button mat-icon-button color="warn" (click)="clickDelete.emit(broadCastMedium)">
 					<mat-icon>delete_forever</mat-icon>
 				</button>
 			</div>
 
-			<div class="circle">
+			<div class="circle" (click)="clickEdit.emit(broadCastMedium)">
 				<button mat-icon-button color="primary">
 					<mat-icon>edit</mat-icon>
 				</button>

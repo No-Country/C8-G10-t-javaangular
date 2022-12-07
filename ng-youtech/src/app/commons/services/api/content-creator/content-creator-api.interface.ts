@@ -23,3 +23,20 @@ export interface TagList {
 	idTag: number;
 	description: string;
 }
+
+export interface IResponseContentCreatorForEdition {
+	name: string;
+	lastName: string;
+	urlGithub?: string;
+	urlTwitter?: string;
+	urlLinkedin?: string;
+	pseudonym: string;
+	email: string;
+	password: string;
+	nameImageProfile: string;
+	imageProfile: string;
+}
+
+export interface IRequestContentCreatorEdit extends IResponseContentCreatorForEdition {
+	idContentCreator: number;
+}

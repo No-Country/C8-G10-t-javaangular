@@ -23,9 +23,7 @@
 
 	<section class="actions">
 		<button mat-flat-button color="primary">Buscar</button>
-		<button class="actions__button-clear" mat-stroked-button color="primary" (click)="openDialog('3000ms', '1500ms')">
-			Limpiar búsqueda
-		</button>
+		<button class="actions__button-clear" mat-stroked-button color="primary">Limpiar búsqueda</button>
 	</section>
 
 	<section>
@@ -36,6 +34,7 @@
 		<app-card-home-creator-content
 			*ngFor="let item of listContentCreator"
 			[dataCard]="item"
+			(clickCard)="clickCard($event)"
 		></app-card-home-creator-content>
 	</section>
 </div>

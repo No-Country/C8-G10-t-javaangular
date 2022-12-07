@@ -1,6 +1,8 @@
 @use '../../../../../assets/theme/colors.scss';
 .container {
 	width: 578px;
+	padding: 7px;
+	border-radius: 12px;
 	.content {
 		display: flex;
 		position: relative;
@@ -35,6 +37,7 @@
 					display: flex;
 					gap: 0.5rem;
 					cursor: pointer;
+					align-items: flex-end;
 					&__image {
 						width: 24px;
 					}
@@ -61,5 +64,4 @@
 .example-viewport {
 	height: 72px;
 	width: 100%;
-	border: 1px solid black;
 }

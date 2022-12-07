@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICardContentCreatorComponente } from '../../model/component.interface';
 
 @Component({
@@ -6,8 +6,7 @@ import { ICardContentCreatorComponente } from '../../model/component.interface';
 	templateUrl: './card-home-creator-content.component.html',
 	styleUrls: ['./card-home-creator-content.component.scss']
 })
-export class CardHomeCreatorContentComponent implements OnInit {
+export class CardHomeCreatorContentComponent {
 	@Input() dataCard?: ICardContentCreatorComponente;
-
-	ngOnInit(): void {}
+	@Output() clickCard = new EventEmitter<number>();
 }

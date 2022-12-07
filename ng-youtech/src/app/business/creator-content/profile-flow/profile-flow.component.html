@@ -1,7 +1,7 @@
 <div class="main">
-	<form class="container" autocomplete="off" [formGroup]="formGroup">
+	<form class="container" autocomplete="off" [formGroup]="formGroup" (ngSubmit)="clickSaveProfile()">
 		<section class="container-button">
-			<button class="" mat-flat-button color="primary">Guardar</button>
+			<button class="" mat-flat-button color="primary" type="submit">Guardar</button>
 		</section>
 
 		<div class="container-photo">
@@ -20,6 +20,7 @@
 				<input hidden (change)="onFileSelected($event)" #fileInput type="file" accept=".jpg,.jpeg,.png" />
 				<span class="material-icons" *ngIf="!imageSrc"> add_a_photo </span>
 			</div>
+			<mat-hint>Click para cambiar la foto</mat-hint>
 			<mat-error *ngIf="!imageSrc"> Agregue una <strong>imagen</strong> </mat-error>
 		</div>
 
@@ -29,7 +30,7 @@
 					<mat-label>Nombres</mat-label>
 					<input matInput type="text" formControlName="name" />
 					<mat-icon matPrefix>account_circle</mat-icon>
-					<mat-error *ngIf="firtsField.hasError('required')"> Ingrese sus nombres </mat-error>
+					<mat-error *ngIf="nameField.hasError('required')"> Ingrese sus nombres </mat-error>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline">
@@ -41,13 +42,13 @@
 
 				<mat-form-field appearance="outline">
 					<mat-label>Pseudonimo</mat-label>
-					<input matInput type="text" />
+					<input matInput type="text" formControlName="pseudonym" />
 					<mat-icon matPrefix>account_circle</mat-icon>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline">
 					<mat-label>E-mail</mat-label>
-					<input matInput type="text" />
+					<input matInput type="text" formControlName="email" />
 					<mat-icon matPrefix>email</mat-icon>
 					<mat-error *ngIf="emailField.hasError('required')">Ingrese su e-mail </mat-error>
 					<mat-error *ngIf="emailField.hasError('email')"> Ingrese un e-mail valido </mat-error>
@@ -57,26 +58,26 @@
 			<section class="column2">
 				<mat-form-field appearance="outline">
 					<mat-label>Contraseña</mat-label>
-					<input matInput type="password" />
+					<input matInput type="password" formControlName="password" />
 					<mat-icon matPrefix>password</mat-icon>
 					<mat-error *ngIf="passwordField.hasError('required')"> Ingrese una contraseña </mat-error>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline">
 					<mat-label>GiHub</mat-label>
-					<input matInput type="text" />
+					<input matInput type="text" formControlName="urlGithub" />
 					<mat-icon svgIcon="github" matPrefix></mat-icon>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline">
 					<mat-label>Twitter</mat-label>
-					<input matInput type="text" />
+					<input matInput type="text" formControlName="urlTwitter" />
 					<mat-icon svgIcon="twitter" matPrefix></mat-icon>
 				</mat-form-field>
 
 				<mat-form-field appearance="outline">
 					<mat-label>LinkedIn</mat-label>
-					<input matInput type="text" />
+					<input matInput type="text" formControlName="urlLinkedin" />
 					<mat-icon svgIcon="linkedIn" matPrefix></mat-icon>
 				</mat-form-field>
 			</section>

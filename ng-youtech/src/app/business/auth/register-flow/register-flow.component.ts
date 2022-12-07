@@ -48,14 +48,18 @@ export class RegisterFlowComponent {
 	);
 
 	async clickRegister(): Promise<void> {
-		console.log(this.confirmPasswordField.errors);
-
 		if (this.formGroup.valid) {
-			const url = await this._fireStorageService.saveImage(this._fileSelected);
-			const request = this._getRequest(url);
-			this._authApiService.register(request).subscribe((response) => {
-				if (response.success) {
-					this._saveTokenAndRedirect(response.data);
+			const dataImage = await this._fireStorageService.saveImage(this._fileSelected);
+			const request = this._getRequest(dataImage.url, dataImage.nameFile);
+
+			this._authApiService.register(request).subscribe({
+				next: (response) => {
+					if (response.success) {
+						this._saveTokenAndRedirect(response.data);
+					}
+				},
+				error: () => {
+					this._fireStorageService.deleteImage(request.nameImageProfile);
 				}
 			});
 		}
@@ -71,9 +75,9 @@ export class RegisterFlowComponent {
 		this._router.navigateByUrl(PathWeb.CONTENT_CREATOR.pathWithSlash);
 	}
 
-	private _getRequest(imageProfile: string): IRequestRegister {
+	private _getRequest(imageProfile: string, nameImageProfile: string): IRequestRegister {
 		const request = this.formGroup.getRawValue();
-		return { ...request, imageProfile };
+		return { ...request, imageProfile, nameImageProfile };
 	}
 
 	onFileSelected(event: Event): void {

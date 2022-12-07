@@ -5,19 +5,21 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AvatarComponent } from '../../../../../commons/components/avatar/avatar.component';
+import { SharedPipeModule } from '../../../../../commons/shared/shared-pipe.module';
 import { CreatorContentDetailComponent } from './creator-content-detail.component';
 import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
-  declarations: [CreatorContentDetailComponent, DetailComponent],
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    AvatarComponent,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
-  ],
-  exports: [CreatorContentDetailComponent],
+	declarations: [CreatorContentDetailComponent, DetailComponent],
+	imports: [
+		CommonModule,
+		MatTabsModule,
+		AvatarComponent,
+		MatButtonModule,
+		MatIconModule,
+		MatChipsModule,
+		SharedPipeModule
+	],
+	exports: [CreatorContentDetailComponent]
 })
 export class CreatorContentDetailModule {}

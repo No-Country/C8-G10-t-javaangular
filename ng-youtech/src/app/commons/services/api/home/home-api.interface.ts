@@ -8,3 +8,8 @@ export interface IResponseContentCreatorHome {
 	idPseudonym?: string;
 	imageProfile: string;
 }
+
+export interface IResponseTags {
+	idTag: number;
+	description: string;
+}

@@ -5,6 +5,7 @@ mat-card {
 	height: 306px;
 	border-radius: 12px;
 	background-color: colors.$background-card-color;
+	cursor: pointer;
 }
 
 mat-card-header {
