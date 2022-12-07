@@ -101,7 +101,14 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         if (creators.isEmpty()) {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
-        return mapper.mapAll(creators, ContentCreatorResponseDTO.class);
+
+        List<ContentCreatorResponseDTO> contentCreatorResponseDTOList = creators.stream().map(item -> {
+            ContentCreatorResponseDTO contentCreatorResponseDTO = mapper.map(item, ContentCreatorResponseDTO.class);
+            contentCreatorResponseDTO.setCountBroadcastMedium(item.getBroadcastMediumList().size());
+            return contentCreatorResponseDTO;
+        }).collect(Collectors.toList());
+
+        return contentCreatorResponseDTOList;
     }
 
     @Transactional

@@ -18,4 +18,5 @@ public class ContentCreatorResponseDTO {
     private String urlLinkedin;
     private String pseudonym;
     private String imageProfile;
+    private int countBroadcastMedium;
 }
