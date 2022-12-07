@@ -13,6 +13,7 @@ import NoCountry.YouTech.repository.BroadcastMediumTagRepository;
 import NoCountry.YouTech.repository.ContentCreatorRepository;
 import NoCountry.YouTech.repository.UserRepository;
 import NoCountry.YouTech.service.IContentCreator;
+import NoCountry.YouTech.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,7 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         );
         ContentCreator creator = user.getContentCreator();
         BroadcastMedium broadcastMedium = mapper.map(dto, BroadcastMedium.class);
+        broadcastMedium.setStatus((int)Util.STATUS_ACTIVE);
         broadcastMedium.setIdBroadcastType(new BroadcastType(dto.getIdBroadcastType()));
         broadcastMedium.setIdContentCreator(creator);
 
