@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -35,6 +36,11 @@ public class ContentCreatorController {
         return ResponseEntity.status(OK).body(service.getById(id));
     }
 
-
+    @GetMapping("/find")
+    public ResponseEntity<List<ContentCreatorResponseDTO>> find(@RequestBody Map<String, String> body) {
+        /*Service in progress*/
+        String name = body.get("name");
+        return ResponseEntity.status(OK).body(service.findContentCreators(name, null));
+    }
 
 }

@@ -21,4 +21,5 @@ public interface IContentCreator {
 
     List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator);
 
+    List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags);
 }

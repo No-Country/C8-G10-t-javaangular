@@ -121,5 +121,12 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         }).collect(Collectors.toList());
     }
 
+    public List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags) {
+        System.out.println(" name ---: " + name);
+        System.out.println(" response ---: " + creatorRepository.findLikeName(name));
+        List<ContentCreatorResponseDTO> creators =creatorRepository.findLikeLastName(name);
+        System.out.println(" list ---: " + creators);
+        return null;
+    }
 
 }

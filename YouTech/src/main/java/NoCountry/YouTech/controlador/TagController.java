@@ -1,14 +1,13 @@
 package NoCountry.YouTech.controlador;
 
+import NoCountry.YouTech.dto.tag.Tag2UpdateDTO;
 import NoCountry.YouTech.dto.tag.TagResponseDTO;
-import NoCountry.YouTech.model.Tag;
 import NoCountry.YouTech.service.ITag;
 import NoCountry.YouTech.util.Util;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +24,14 @@ public class TagController {
     public ResponseEntity<List<TagResponseDTO>> getAll() {
         return ResponseEntity.status(OK).body(service.getAllTags(Util.STATUS_ACTIVE));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TagResponseDTO> update(@RequestBody Tag2UpdateDTO dto, @PathVariable Long id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(dto, id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.delete(id));
+    }
+
 }
