@@ -8,5 +8,5 @@ import { ICardContentCreatorComponente } from '../../model/component.interface';
 })
 export class CardHomeCreatorContentComponent {
 	@Input() dataCard?: ICardContentCreatorComponente;
-	@Output() clickCard = new EventEmitter<number>();
+	@Output() clickCard = new EventEmitter<ICardContentCreatorComponente>();
 }

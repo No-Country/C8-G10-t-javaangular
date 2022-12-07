@@ -25,7 +25,7 @@ export class LoginFlowComponent {
 	) {}
 
 	form = this._formBuilder.nonNullable.group({
-		email: ['leonidas@gmail.com', [Validators.email, Validators.required]],
+		email: ['jimmyhdolores@gmail.com', [Validators.email, Validators.required]],
 		password: ['123', Validators.required]
 	});
 

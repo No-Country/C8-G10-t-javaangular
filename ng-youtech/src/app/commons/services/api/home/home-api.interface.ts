@@ -7,6 +7,7 @@ export interface IResponseContentCreatorHome {
 	urlLinkedin?: string;
 	idPseudonym?: string;
 	imageProfile: string;
+	countBroadcastMedium: number;
 }
 
 export interface IResponseTags {

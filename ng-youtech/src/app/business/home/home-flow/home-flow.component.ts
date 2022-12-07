@@ -8,6 +8,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { IResponseContentCreatorHome } from '../../../commons/services/api/home/home-api.interface';
 import { HomeApiService } from '../../../commons/services/api/home/home-api.service';
 import { CreatorContentDetailComponent } from './components/creator-content-detail/creator-content-detail.component';
+import { ICardContentCreatorComponente } from './model/component.interface';
 @Component({
 	selector: 'app-home-flow',
 	templateUrl: './home-flow.component.html',
@@ -63,10 +64,14 @@ export class HomeFlowComponent implements OnInit {
 		this.fruitCtrl.setValue(null);
 	}
 
-	clickCard(idContentCreator: number) {
+	clickCard(item: ICardContentCreatorComponente) {
+		if (item.countBroadcastMedium === 0) {
+			return;
+		}
+
 		this.dialog.open(CreatorContentDetailComponent, {
 			maxWidth: '800px',
-			data: { idContentCreator }
+			data: { idContentCreator: item.idContentCreator }
 		});
 	}
 
