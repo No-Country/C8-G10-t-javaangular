@@ -22,9 +22,11 @@ public class BroadcastMediumContentCreatorResponseDTO {
 
     private Integer idBroadcastMedium;
     private String urImage;
+    private String nameImage;
     private String name;
+    private String description;
     private int idPlatform;
     private String platform;
-    private String urlPLatform;
+    private String urlPlatform;
     private List<broadcastMediumTagList> tagList;
 }

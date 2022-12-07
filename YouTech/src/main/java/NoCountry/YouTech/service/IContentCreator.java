@@ -2,11 +2,9 @@ package NoCountry.YouTech.service;
 
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
-import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
-import NoCountry.YouTech.model.ContentCreator;
 
 import java.util.List;
 
@@ -19,6 +17,10 @@ public interface IContentCreator {
     ContentCreatorResponseDTO getById(Integer id);
 
     String saveBroadcastMedium(String email, BroadcastMediumRequestDTO dto);
+
+    String updateBroadcastMedium(String email, Integer idBroadcastMedium, BroadcastMediumRequestDTO dto);
+
+    String deleteBroadcastMedium(String email, Integer idBroadcastMedium);
 
     List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator);
 

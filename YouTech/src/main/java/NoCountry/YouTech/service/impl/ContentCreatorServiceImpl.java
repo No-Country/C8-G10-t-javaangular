@@ -41,6 +41,8 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final ContentCreatorRepository creatorRepository;
     private final UserRepository repository;
     private final BroadcastMediumRepository broadcastMediumRepository;
+    private final BroadcastMediumTagRepository broadcastMediumTagRepository;
+
     private final GenericMapper mapper;
     private final MessageSource messageSource;
     private final PasswordEncoder passwordEncoder;
@@ -128,6 +130,49 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         return messageSource.getMessage("info-positive", null, Locale.US);
     }
 
+    @Transactional
+    @Override
+    public String updateBroadcastMedium(String email, Integer idBroadcastMedium, BroadcastMediumRequestDTO dto) {
+        User user = repository.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException(messageSource.getMessage("user-not-found",
+                        null, Locale.US))
+        );
+
+        BroadcastMedium broadcastMedium = broadcastMediumRepository.findById(idBroadcastMedium).orElseThrow(() ->
+                new EntityNotFoundException(messageSource.getMessage("broadcast-medium-not-found",
+                        new Object[]{idBroadcastMedium}, Locale.US))
+        );
+
+        broadcastMedium.setName(dto.getName());
+        broadcastMedium.setDescription(dto.getDescription());
+        broadcastMedium.setUrl(dto.getUrl());
+        broadcastMedium.setIdBroadcastType(new BroadcastType(dto.getIdBroadcastType()));
+        broadcastMedium.setNameImage(dto.getNameImage());
+        broadcastMedium.setUrImage(dto.getUrImage());
+
+        List listIdTag = dto.getBroadcastMediumTagList().stream().map((item) -> item.longValue()).collect(Collectors.toList());
+        broadcastMediumTagRepository.deleteAllById(listIdTag);
+
+        List<BroadcastMediumTag> listBroadcastMediumTag = dto.getBroadcastMediumTagList().stream().map((item) -> new BroadcastMediumTag(item.longValue())).collect(Collectors.toList());
+        broadcastMedium.setBroadcastMediumTagList(listBroadcastMediumTag);
+        broadcastMediumRepository.save(broadcastMedium);
+
+        return messageSource.getMessage("info-success", null, Locale.US);
+    }
+
+    @Transactional
+    @Override
+    public String deleteBroadcastMedium(String email, Integer idBroadcastMedium) {
+        repository.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException(messageSource.getMessage("user-not-found",
+                        null, Locale.US))
+        );
+        broadcastMediumRepository.deleteById(idBroadcastMedium);
+
+        return messageSource.getMessage("info-success", null, Locale.US);
+
+    }
+
     @Override
     public List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator) {
         List<BroadcastMedium> broadcastMediumList = broadcastMediumRepository.getAllBroadcastMedium(idContentCreator);
@@ -144,7 +189,10 @@ public class ContentCreatorServiceImpl implements IContentCreator {
 
             BroadcastMediumContentCreatorResponseDTO broadcastMediumContentCreatorResponseDTO =
                     new BroadcastMediumContentCreatorResponseDTO(
-                            item.getIdBroadcastMedium(), item.getUrImage(), item.getName(), item.getIdBroadcastType().getIdBroadcastType(), item.getIdBroadcastType().getDescription(), item.getUrl(), broadcastMediumBroadcastMediumTagListList);
+                            item.getIdBroadcastMedium(), item.getUrImage(), item.getNameImage(),
+                            item.getName(), item.getDescription(), item.getIdBroadcastType().getIdBroadcastType(),
+                            item.getIdBroadcastType().getDescription(), item.getUrl(),
+                            broadcastMediumBroadcastMediumTagListList);
 
             return broadcastMediumContentCreatorResponseDTO;
         }).collect(Collectors.toList());

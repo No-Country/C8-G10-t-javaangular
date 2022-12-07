@@ -5,6 +5,8 @@
  */
 package NoCountry.YouTech.model;
 
+import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -192,5 +194,6 @@ public class BroadcastMedium implements Serializable {
     public String toString() {
         return "NoCountry.YouTech.model.BroadcastMedium[ idBroadcastMedium=" + idBroadcastMedium + " ]";
     }
+
 
 }
