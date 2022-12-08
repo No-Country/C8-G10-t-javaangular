@@ -51,12 +51,12 @@ public class ContentCreatorController {
     }
 
     @PostMapping("find_by_tags")
-    public ResponseEntity<List<ContentCreatorBasicDTO>> findByTags(@RequestBody List<Integer> idTag) {
+    public ResponseEntity<List<ContentCreatorResponseDTO>> findByTags(@RequestBody List<Integer> idTag) {
         return ResponseEntity.ok(this.service.findByTags(idTag));
     }
 
     @PostMapping("find_by_tags_name")
-    public ResponseEntity<List<ContentCreatorBasicDTO>> findByTagsName(@RequestBody ContentCreatorRequestSearchDTO contentCreatorRequestSearchDTO) {
+    public ResponseEntity<List<ContentCreatorResponseDTO>> findByTagsName(@RequestBody ContentCreatorRequestSearchDTO contentCreatorRequestSearchDTO) {
         return ResponseEntity.ok(this.service.findByTagsAndName(contentCreatorRequestSearchDTO.getIdTags(), contentCreatorRequestSearchDTO.getName()));
     }
 }

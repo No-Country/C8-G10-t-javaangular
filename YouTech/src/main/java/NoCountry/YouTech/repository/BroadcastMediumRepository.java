@@ -11,4 +11,6 @@ import java.util.List;
 public interface BroadcastMediumRepository extends JpaRepository<BroadcastMedium, Integer> {
     @Query("SELECT b FROM BroadcastMedium b JOIN b.idContentCreator creator  WHERE creator.idContentCreator=:idContentCreator")
     List<BroadcastMedium> getAllBroadcastMedium(Integer idContentCreator);
+
+
 }

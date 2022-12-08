@@ -30,7 +30,7 @@ public interface IContentCreator {
 
     List<ContentCreatorBasicDTO> getByFilters(String name, Integer idTag);
 
-    List<ContentCreatorBasicDTO> findByTags(List<Integer> idTags);
+    List<ContentCreatorResponseDTO> findByTags(List<Integer> idTags);
 
-    List<ContentCreatorBasicDTO> findByTagsAndName(List<Integer> idTags, String name);
+    List<ContentCreatorResponseDTO> findByTagsAndName(List<Integer> idTags, String name);
 }

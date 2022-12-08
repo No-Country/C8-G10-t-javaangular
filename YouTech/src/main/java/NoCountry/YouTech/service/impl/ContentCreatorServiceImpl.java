@@ -215,24 +215,38 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     }
 
     @Override
-    public List<ContentCreatorBasicDTO> findByTags(List<Integer> idTags) {
+    public List<ContentCreatorResponseDTO> findByTags(List<Integer> idTags) {
         List<ContentCreator> list = this.creatorRepository.findByTags(idTags);
         if (list.isEmpty()) {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
 
-        List<ContentCreatorBasicDTO> contentCreatorBasicDTOS = mapper.mapAll(list, ContentCreatorBasicDTO.class);
+        List<ContentCreatorResponseDTO> contentCreatorBasicDTOS = list.stream().map(item -> {
+            ContentCreatorResponseDTO contentCreatorResponseDTO = mapper.map(item, ContentCreatorResponseDTO.class);
+            List mediumList = broadcastMediumRepository.getAllBroadcastMedium(contentCreatorResponseDTO.getIdContentCreator());
+            contentCreatorResponseDTO.setCountBroadcastMedium(mediumList.size());
+
+            return contentCreatorResponseDTO;
+        }).collect(Collectors.toList());
+
         return contentCreatorBasicDTOS;
     }
 
     @Override
-    public List<ContentCreatorBasicDTO> findByTagsAndName(List<Integer> idTags, String name) {
-        List<ContentCreator> list = this.creatorRepository.findByTagsName(idTags,name);
+    public List<ContentCreatorResponseDTO> findByTagsAndName(List<Integer> idTags, String name) {
+        List<ContentCreator> list = this.creatorRepository.findByTagsName(idTags, name);
         if (list.isEmpty()) {
             throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
         }
 
-        List<ContentCreatorBasicDTO> contentCreatorBasicDTOS = mapper.mapAll(list, ContentCreatorBasicDTO.class);
+        List<ContentCreatorResponseDTO> contentCreatorBasicDTOS = list.stream().map(item -> {
+            ContentCreatorResponseDTO contentCreatorResponseDTO = mapper.map(item, ContentCreatorResponseDTO.class);
+            List mediumList = broadcastMediumRepository.getAllBroadcastMedium(contentCreatorResponseDTO.getIdContentCreator());
+            contentCreatorResponseDTO.setCountBroadcastMedium(mediumList.size());
+
+            return contentCreatorResponseDTO;
+        }).collect(Collectors.toList());
+
         return contentCreatorBasicDTOS;
     }
 
