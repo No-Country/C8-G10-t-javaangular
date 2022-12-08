@@ -35,4 +35,10 @@ public class BroadcastMediumController {
     public ResponseEntity<?> getAllBroadcastMedium(@PathVariable Integer idContentCreator) {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllBroadcastMedium(idContentCreator));
     }
+
+    @GetMapping("/home/{idContentCreator}")
+    public ResponseEntity<?> getAllBroadcastMediumHome(@PathVariable Integer idContentCreator) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getAllBroadcastMedium(idContentCreator));
+    }
+
 }
