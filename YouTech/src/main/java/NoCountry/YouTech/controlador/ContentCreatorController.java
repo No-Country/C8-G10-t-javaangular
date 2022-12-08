@@ -1,16 +1,14 @@
 package NoCountry.YouTech.controlador;
 
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreatorBasicDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
+import NoCountry.YouTech.dto.contentCreator.*;
 import NoCountry.YouTech.model.ContentCreator;
 import NoCountry.YouTech.service.IContentCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +28,12 @@ public class ContentCreatorController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ContentCreatorResponseDTO>> getAll() { return ResponseEntity.status(OK).body(service.getAllContentCreators());
+    public ResponseEntity<List<ContentCreatorResponseDTO>> getAll() {
+        return ResponseEntity.status(OK).body(service.getAllContentCreators());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContentCreatorResponseDTO> getById(Principal principal,@PathVariable Integer id) {
+    public ResponseEntity<ContentCreatorResponseDTO> getById(Principal principal, @PathVariable Integer id) {
         return ResponseEntity.status(OK).body(service.getById(id));
     }
 
@@ -43,12 +42,6 @@ public class ContentCreatorController {
         return ResponseEntity.status(OK).body(service.getForEdition(id));
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<List<ContentCreatorResponseDTO>> find(@RequestBody Map<String, String> body) {
-        /*Service in progress*/
-        String name = body.get("name");
-        return ResponseEntity.status(OK).body(service.findContentCreators(name, null));
-    }
 
     @GetMapping
     public ResponseEntity<List<ContentCreatorBasicDTO>> getDetailsByFilters(
@@ -57,5 +50,13 @@ public class ContentCreatorController {
         return ResponseEntity.ok(this.service.getByFilters(name, idTag));
     }
 
+    @PostMapping("find_by_tags")
+    public ResponseEntity<List<ContentCreatorBasicDTO>> findByTags(@RequestBody List<Integer> idTag) {
+        return ResponseEntity.ok(this.service.findByTags(idTag));
+    }
 
+    @PostMapping("find_by_tags_name")
+    public ResponseEntity<List<ContentCreatorBasicDTO>> findByTagsName(@RequestBody ContentCreatorRequestSearchDTO contentCreatorRequestSearchDTO) {
+        return ResponseEntity.ok(this.service.findByTagsAndName(contentCreatorRequestSearchDTO.getIdTags(), contentCreatorRequestSearchDTO.getName()));
+    }
 }

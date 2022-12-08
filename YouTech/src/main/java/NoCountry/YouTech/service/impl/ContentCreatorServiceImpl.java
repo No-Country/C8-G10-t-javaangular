@@ -192,13 +192,6 @@ public class ContentCreatorServiceImpl implements IContentCreator {
         }).collect(Collectors.toList());
     }
 
-    public List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags) {
-        System.out.println(" name ---: " + name);
-        System.out.println(" response ---: " + creatorRepository.findLikeName(name));
-        List<ContentCreatorResponseDTO> creators = creatorRepository.findLikeLastName(name);
-        System.out.println(" list ---: " + creators);
-        return null;
-    }
 
     @Override
     public ContentCreatorResponseForEditionDTO getForEdition(Integer idContentCreator) {
@@ -212,13 +205,35 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     }
 
     public List<ContentCreatorBasicDTO> getByFilters(String name, Integer idTag) {
-        ContentCreatorFilters filtersDTO =new ContentCreatorFilters(name, idTag);
-        if(creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll(creatorSPecification.getByFilters(filtersDTO))).isEmpty()) {
+        ContentCreatorFilters filtersDTO = new ContentCreatorFilters(name, idTag);
+        if (creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll(creatorSPecification.getByFilters(filtersDTO))).isEmpty()) {
             return creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll());
         } else {
             return creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll(creatorSPecification.getByFilters(filtersDTO)));
         }
 
+    }
+
+    @Override
+    public List<ContentCreatorBasicDTO> findByTags(List<Integer> idTags) {
+        List<ContentCreator> list = this.creatorRepository.findByTags(idTags);
+        if (list.isEmpty()) {
+            throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
+        }
+
+        List<ContentCreatorBasicDTO> contentCreatorBasicDTOS = mapper.mapAll(list, ContentCreatorBasicDTO.class);
+        return contentCreatorBasicDTOS;
+    }
+
+    @Override
+    public List<ContentCreatorBasicDTO> findByTagsAndName(List<Integer> idTags, String name) {
+        List<ContentCreator> list = this.creatorRepository.findByTagsName(idTags,name);
+        if (list.isEmpty()) {
+            throw new EmptyListException(messageSource.getMessage("empty-list", null, Locale.US));
+        }
+
+        List<ContentCreatorBasicDTO> contentCreatorBasicDTOS = mapper.mapAll(list, ContentCreatorBasicDTO.class);
+        return contentCreatorBasicDTOS;
     }
 
 }

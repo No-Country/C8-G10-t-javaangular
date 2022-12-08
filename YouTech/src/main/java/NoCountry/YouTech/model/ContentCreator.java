@@ -38,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
         , @NamedQuery(name = "ContentCreator.findByName", query = "SELECT c FROM ContentCreator c WHERE c.name = :name")
         , @NamedQuery(name = "ContentCreator.findByLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName = :lastName")
         , @NamedQuery(name = "ContentCreator.findLikeName", query = "SELECT c FROM ContentCreator c")
-        , @NamedQuery(name = "ContentCreator.findLikeLastName", query = "SELECT c FROM ContentCreator c WHERE c.lastName LIKE CONTACT('%',:lastName,'%')")
         , @NamedQuery(name = "ContentCreator.findByIdPseudonym", query = "SELECT c FROM ContentCreator c WHERE c.idPseudonym = :idPseudonym")
         , @NamedQuery(name = "ContentCreator.findByImageProfile", query = "SELECT c FROM ContentCreator c WHERE c.imageProfile = :imageProfile")
         , @NamedQuery(name = "ContentCreator.findByUrlGithub", query = "SELECT c FROM ContentCreator c WHERE c.urlGithub = :urlGithub")

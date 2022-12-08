@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -29,6 +30,8 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers(GET, "/**").permitAll()
+                .antMatchers(POST, "/content_creator/find_by_tags").permitAll()
+                .antMatchers(POST, "/content_creator/find_by_tags_name").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors()

@@ -25,8 +25,12 @@ public interface IContentCreator {
 
     List<BroadcastMediumContentCreatorResponseDTO> getAllBroadcastMedium(Integer idContentCreator);
 
-    List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags);
 
     ContentCreatorResponseForEditionDTO getForEdition(Integer idContentCreator);
+
     List<ContentCreatorBasicDTO> getByFilters(String name, Integer idTag);
+
+    List<ContentCreatorBasicDTO> findByTags(List<Integer> idTags);
+
+    List<ContentCreatorBasicDTO> findByTagsAndName(List<Integer> idTags, String name);
 }
