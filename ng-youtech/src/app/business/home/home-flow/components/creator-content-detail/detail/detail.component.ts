@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, Input } from '@angular/core';
 import { IResponseAllBroadcastMedium } from '../../../../../../commons/services/api/broadcast-medium/broadcast-medium-api.interface';
 
@@ -8,4 +9,12 @@ import { IResponseAllBroadcastMedium } from '../../../../../../commons/services/
 })
 export class DetailComponent {
 	@Input() item!: IResponseAllBroadcastMedium;
+
+	isSmallScreen = false;
+
+	constructor(private _breakpointObserver: BreakpointObserver) {
+		this._breakpointObserver.observe('(max-width: 755px)').subscribe((result) => {
+			this.isSmallScreen = result.matches;
+		});
+	}
 }

@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { ToastEvokeService } from '@costlydeveloper/ngx-awesome-popup';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { catchError, finalize, Observable, throwError } from 'rxjs';
+import { catchError, debounceTime, finalize, Observable, throwError } from 'rxjs';
 import { IResponse } from './../services/api/base-api.model';
 
 @Injectable()
@@ -15,10 +15,9 @@ export class ErrorApiInterceptor implements HttpInterceptor {
 		}, 10);
 
 		return next.handle(request).pipe(
+			debounceTime(50),
 			finalize(() => {
-				setTimeout(() => {
-					this._ngxService.stop();
-				}, 20);
+				this._ngxService.stop();
 			}),
 			catchError((error: HttpErrorResponse) => this._errorHandler(error))
 		);

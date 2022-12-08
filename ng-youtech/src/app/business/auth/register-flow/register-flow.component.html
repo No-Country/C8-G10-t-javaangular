@@ -1,3 +1,7 @@
+<div class="movil-image" *ngIf="isSmallScreen">
+	<h1>Comparte tu contenido con los demás</h1>
+	<img src="assets/svg/register.svg" alt="registrate" />
+</div>
 <section class="container">
 	<mat-card class="content">
 		<form class="form" [formGroup]="formGroup" (ngSubmit)="clickRegister()" autocomplete="off">
@@ -64,7 +68,7 @@
 			<button mat-flat-button color="primary" type="submit" [disabled]="disabledButton">Guardar</button>
 		</form>
 
-		<section class="message">
+		<section class="message" *ngIf="!isSmallScreen">
 			<h1 class="message__title">Comparte tu contenido con los demás</h1>
 			<img class="message__image" src="assets/svg/register.svg" alt="registrate" />
 		</section>

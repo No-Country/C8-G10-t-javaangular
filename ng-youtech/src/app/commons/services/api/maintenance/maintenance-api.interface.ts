@@ -9,3 +9,9 @@ export interface IRequestSaveTag {
 	description: string;
 	status: number;
 }
+
+export interface IResponseBroadcastType {
+	idBroadCastType: number;
+	description: string;
+	status: number;
+}

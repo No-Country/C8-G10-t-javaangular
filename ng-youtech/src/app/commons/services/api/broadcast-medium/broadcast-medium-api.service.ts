@@ -5,7 +5,8 @@ import { IResponse } from '../base-api.model';
 import { environment } from './../../../../../environments/environment';
 import { IRequestSaveBroadcastMedium, IResponseAllBroadcastMedium } from './broadcast-medium-api.interface';
 
-export const URL_BROADCAST_MEDIUM = `${environment.host}/broadcast_medium`;
+const URL_BROADCAST_MEDIUM = `${environment.host}/broadcast_medium`;
+export const URL_BROADCAST_MEDIUM_HOME = `${URL_BROADCAST_MEDIUM}/home`;
 
 @Injectable({ providedIn: 'root' })
 export class BroadCastMediumApiService {
@@ -14,6 +15,12 @@ export class BroadCastMediumApiService {
 	getAllBroadcastMedium(idContentCreator: number): Observable<IResponse<IResponseAllBroadcastMedium[]>> {
 		return this._httpClient.get<IResponse<IResponseAllBroadcastMedium[]>>(
 			`${URL_BROADCAST_MEDIUM}/${idContentCreator}`
+		);
+	}
+
+	getAllBroadcastMediumHome(idContentCreator: number): Observable<IResponse<IResponseAllBroadcastMedium[]>> {
+		return this._httpClient.get<IResponse<IResponseAllBroadcastMedium[]>>(
+			`${URL_BROADCAST_MEDIUM_HOME}/${idContentCreator}`
 		);
 	}
 

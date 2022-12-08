@@ -40,3 +40,14 @@ export interface IResponseContentCreatorForEdition {
 export interface IRequestContentCreatorEdit extends IResponseContentCreatorForEdition {
 	idContentCreator: number;
 }
+
+export interface IResponseContentCreatorSearchPrincipal {
+	name: string;
+	lastName: string;
+	urlGithub?: string;
+	urlTwitter?: string;
+	urlLinkedin?: string;
+	pseudonym: string;
+	nameImageProfile: string;
+	imageProfile: string;
+}

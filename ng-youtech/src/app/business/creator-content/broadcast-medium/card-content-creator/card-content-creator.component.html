@@ -1,4 +1,4 @@
-<mat-card class="container" *ngIf="broadCastMedium">
+<mat-card class="container" *ngIf="broadCastMedium" [ngStyle]="{ width: isSmallScreen ? WidthCard : 'none' }">
 	<mat-card-content class="content">
 		<img class="content__image" [src]="broadCastMedium.urImage" />
 

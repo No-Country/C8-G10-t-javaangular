@@ -1,8 +1,5 @@
 @use '../../../../assets/theme/colors.scss';
 ::ng-deep {
-	.mat-dialog-container {
-		padding: 0 !important;
-	}
 	mat-tab-body {
 		height: calc(100% + 5%);
 	}
@@ -35,5 +32,31 @@
 		display: inline-flex;
 		gap: 1em;
 		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 965px) {
+	.container {
+		.filters {
+			flex-direction: column;
+			gap: 5px;
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	h1 {
+		font-size: 18px;
+	}
+	.container {
+		.filters {
+			flex-direction: column;
+
+			mat-hint {
+				font-size: 14px;
+			}
+		}
 	}
 }

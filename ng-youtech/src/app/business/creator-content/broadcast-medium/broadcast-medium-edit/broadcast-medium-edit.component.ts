@@ -193,8 +193,6 @@ export class BroadcastMediumEditComponent implements OnInit {
 	}
 	//#endregion
 
-	private _load() {}
-
 	private _loadBroadcastType() {
 		this._broadcastTypeApiService.getAllActives().subscribe((response) => {
 			if (response.success) {

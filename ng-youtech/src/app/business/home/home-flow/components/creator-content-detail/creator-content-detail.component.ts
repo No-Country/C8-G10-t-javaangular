@@ -17,7 +17,7 @@ export class CreatorContentDetailComponent implements OnInit {
 	allBroadcastMedium: IResponseAllBroadcastMedium[] = [];
 
 	ngOnInit(): void {
-		this._broadCastMediumApiService.getAllBroadcastMedium(this.data.idContentCreator).subscribe((response) => {
+		this._broadCastMediumApiService.getAllBroadcastMediumHome(this.data.idContentCreator).subscribe((response) => {
 			if (response.success) {
 				console.log(response);
 				this.allBroadcastMedium = response.data;

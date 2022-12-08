@@ -2,10 +2,10 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { map, Observable, startWith } from 'rxjs';
-import { IResponseContentCreatorHome } from '../../../commons/services/api/home/home-api.interface';
+import { Observable } from 'rxjs';
+import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { IResponseContentCreatorHome, IResponseTags } from '../../../commons/services/api/home/home-api.interface';
 import { HomeApiService } from '../../../commons/services/api/home/home-api.service';
 import { CreatorContentDetailComponent } from './components/creator-content-detail/creator-content-detail.component';
 import { ICardContentCreatorComponente } from './model/component.interface';
@@ -15,53 +15,102 @@ import { ICardContentCreatorComponente } from './model/component.interface';
 	styleUrls: ['./home-flow.component.scss']
 })
 export class HomeFlowComponent implements OnInit {
-	separatorKeysCodes: number[] = [ENTER, COMMA];
-	fruitCtrl = new FormControl('');
-	filteredFruits: Observable<string[]>;
-	fruits: string[] = ['Lemon'];
-	allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+	@ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
-	@ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
+	separatorKeysCodes: number[] = [ENTER, COMMA];
+	tagsCtrl = new FormControl('');
+	searCtrl = new FormControl('');
+
+	tags: IResponseTags[] = [];
+	allTags: IResponseTags[] = [];
+
+	filteredTags!: Observable<IResponseTags[]>;
 
 	constructor(public dialog: MatDialog, private _homeApiService: HomeApiService) {
-		this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+		this.filteredTags = this.tagsCtrl.valueChanges.pipe(
+			debounceTime(100),
 			startWith(null),
-			map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice()))
+			map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice()))
 		);
 	}
 	listContentCreator: IResponseContentCreatorHome[] = [];
+
 	ngOnInit(): void {
+		this._loadAll();
+	}
+
+	clickBuscar(): void {
+		if (this.tags.length > 0 && this.searCtrl.value) {
+			this._homeApiService
+				.findByTagsName({ name: this.searCtrl.value, dTags: this.tags.map((item) => item.idTag) })
+				.subscribe((response) => {
+					if (response.success) {
+						this.listContentCreator = response.data;
+					}
+				});
+		}
+
+		if (this.tags.length > 0) {
+			this._homeApiService.findByTags(this.tags.map((item) => item.idTag)).subscribe((response) => {
+				if (response.success) {
+					this.listContentCreator = response.data;
+				}
+			});
+		}
+	}
+
+	clickClear(): void {
+		this.searCtrl.setValue('');
+		this.tagsCtrl.setValue('');
+		this.tagInput.nativeElement.value = '';
+		this.tags = [];
+		this._loadAllContent();
+	}
+
+	private _loadAllContent() {
 		this._homeApiService.getAllContentCreator().subscribe((response) => {
-			this.listContentCreator = response.data;
+			if (response.success) {
+				this.listContentCreator = response.data;
+			}
 		});
 	}
 
-	add(event: MatChipInputEvent): void {
-		const value = (event.value || '').trim();
+	private _loadAll() {
+		this._homeApiService
+			.getAllContentCreator()
+			.pipe(switchMap((creator) => this._homeApiService.getActiveTags().pipe(map((tag) => ({ creator, tag })))))
+			.subscribe((response) => {
+				if (response.creator.success) {
+					this.listContentCreator = response.creator.data;
+				}
 
-		// Add our fruit
-		if (value) {
-			this.fruits.push(value);
-		}
-
-		// Clear the input value
-		event.chipInput!.clear();
-
-		this.fruitCtrl.setValue(null);
+				if (response.tag.success) {
+					this.allTags = response.tag.data;
+				}
+			});
 	}
 
-	remove(fruit: string): void {
-		const index = this.fruits.indexOf(fruit);
-
+	remove(tag: IResponseTags): void {
+		const index = this.tags.indexOf(tag);
 		if (index >= 0) {
-			this.fruits.splice(index, 1);
+			this.tags.splice(index, 1);
 		}
 	}
 
 	selected(event: MatAutocompleteSelectedEvent): void {
-		this.fruits.push(event.option.viewValue);
-		this.fruitInput.nativeElement.value = '';
-		this.fruitCtrl.setValue(null);
+		const valueString = event.option.viewValue.toLocaleLowerCase();
+
+		const findValue = this.allTags.find((item) => item.description.toLocaleLowerCase() === valueString);
+		if (findValue) {
+			//Verificamoa que el valor seleccionado ya existe
+			const findInTagsSelected = this.tags.find((item) => item.idTag === findValue.idTag);
+			if (!findInTagsSelected) {
+				this.tags.push(findValue);
+			}
+
+			this.tagInput.nativeElement.value = '';
+			this.tagsCtrl.setValue('');
+		}
 	}
 
 	clickCard(item: ICardContentCreatorComponente) {
@@ -69,15 +118,17 @@ export class HomeFlowComponent implements OnInit {
 			return;
 		}
 
-		this.dialog.open(CreatorContentDetailComponent, {
+		const modal = this.dialog.open(CreatorContentDetailComponent, {
 			maxWidth: '800px',
-			data: { idContentCreator: item.idContentCreator }
+			data: { idContentCreator: item.idContentCreator },
+			panelClass: 'modal-principal'
 		});
+
+		modal.afterClosed().subscribe(() => modal.removePanelClass('modal-principal'));
 	}
 
-	private _filter(value: string): string[] {
+	private _filter(value: string): IResponseTags[] {
 		const filterValue = value.toLowerCase();
-
-		return this.allFruits.filter((fruit) => fruit.toLowerCase().includes(filterValue));
+		return this.allTags.filter((tag) => tag.description.toLocaleLowerCase().includes(filterValue));
 	}
 }

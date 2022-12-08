@@ -1,3 +1,4 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +19,8 @@ import { DetailComponent } from './detail/detail.component';
 		MatButtonModule,
 		MatIconModule,
 		MatChipsModule,
-		SharedPipeModule
+		SharedPipeModule,
+		LayoutModule
 	],
 	exports: [CreatorContentDetailComponent]
 })

@@ -37,6 +37,14 @@ body {
 		box-sizing: border-box;
 	}
 
+	//CLAS MODAL
+
+	.modal-principal {
+		.mat-dialog-container {
+			padding: 0 !important;
+		}
+	}
+
 	// ***************************************CAMBIO DE ESTILOS PARA LOS INPUTS Y LOS CHIPS***************************************
 	.mat-form-field-empty.mat-form-field-label {
 		color: colors.$primary-color;

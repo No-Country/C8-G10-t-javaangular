@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,6 +25,8 @@ export class RegisterFlowComponent {
 	passwordStateMatcher = new PasswordStateMatcher();
 	disabledButton = false;
 
+	isSmallScreen = false;
+
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _authApiService: AuthApiService,
@@ -31,8 +34,13 @@ export class RegisterFlowComponent {
 		private _sessionStorageService: SessionStorageService,
 		private _router: Router,
 		private _headerChannelService: HeaderChannelService,
-		private _toastService: ToastService
-	) {}
+		private _toastService: ToastService,
+		private _breakpointObserver: BreakpointObserver
+	) {
+		this._breakpointObserver.observe('(max-width: 636px)').subscribe((result) => {
+			this.isSmallScreen = result.matches;
+		});
+	}
 
 	formGroup = this._formBuilder.nonNullable.group(
 		{

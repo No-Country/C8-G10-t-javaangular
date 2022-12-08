@@ -1,3 +1,4 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,17 +11,18 @@ import { MatInputModule } from '@angular/material/input';
 import { RegisterFlowComponent } from './register-flow.component';
 
 @NgModule({
-  declarations: [RegisterFlowComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatRippleModule,
-  ],
-  exports: [RegisterFlowComponent],
+	declarations: [RegisterFlowComponent],
+	imports: [
+		CommonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatButtonModule,
+		MatIconModule,
+		ReactiveFormsModule,
+		MatCardModule,
+		MatRippleModule,
+		LayoutModule
+	],
+	exports: [RegisterFlowComponent]
 })
 export class RegisterFlowModule {}

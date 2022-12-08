@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="creator-content">
-		<app-avatar [width]="200" [pathImage]="item.urImage"></app-avatar>
+		<app-avatar [width]="isSmallScreen ? 100 : 200" [pathImage]="item.urImage"></app-avatar>
 		<span class="creator-content__title">Encuéntralo como</span>
 		<span class="creator-content__subtitle">{{ item.name }}</span>
 	</div>
