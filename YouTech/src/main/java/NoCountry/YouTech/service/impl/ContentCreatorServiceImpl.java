@@ -1,24 +1,17 @@
 package NoCountry.YouTech.service.impl;
 
-import NoCountry.YouTech.dto.auth.AuthenticationRequestDTO;
-import NoCountry.YouTech.dto.auth.AuthenticationResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
-import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
+import NoCountry.YouTech.dto.contentCreator.*;
 import NoCountry.YouTech.dto.jwt.JwtDTO;
+import NoCountry.YouTech.mapper.CreatorMapperAux;
 import NoCountry.YouTech.model.*;
 import NoCountry.YouTech.exception.EmptyListException;
 import NoCountry.YouTech.exception.NotFoundException;
 import NoCountry.YouTech.mapper.GenericMapper;
-import NoCountry.YouTech.projection.IPContentCreator;
 import NoCountry.YouTech.projection.IPContentCreatorForEdition;
-import NoCountry.YouTech.repository.BroadcastMediumRepository;
-import NoCountry.YouTech.repository.BroadcastMediumTagRepository;
-import NoCountry.YouTech.repository.ContentCreatorRepository;
-import NoCountry.YouTech.repository.UserRepository;
-import NoCountry.YouTech.security.auth.UserService;
+import NoCountry.YouTech.repository.*;
+import NoCountry.YouTech.repository.specification.CreatorSpecification;
 import NoCountry.YouTech.security.jwt.JwtUtils;
 import NoCountry.YouTech.service.IContentCreator;
 import NoCountry.YouTech.util.Util;
@@ -46,8 +39,9 @@ public class ContentCreatorServiceImpl implements IContentCreator {
     private final GenericMapper mapper;
     private final MessageSource messageSource;
     private final PasswordEncoder passwordEncoder;
-
     private final JwtUtils jwtUtils;
+    private final CreatorSpecification creatorSPecification;
+    private final CreatorMapperAux creatorMapperAux;
 
     @Transactional
     public String update(String email, ContentCreator2UpdateDTO dto) {
@@ -55,13 +49,6 @@ public class ContentCreatorServiceImpl implements IContentCreator {
                 new EntityNotFoundException(messageSource.getMessage("user-not-found",
                         null, Locale.US))
         );
-        
-        /*
-        TODO Jimy hay que modificar en la DB el orden de las entidades que se van creando en la tabla CC
-        if (entity.getIdContentCreator() != user.getIdUser().intValue()) {
-            throw new EntityNotFoundException(messageSource.getMessage("content-creator-not-found", new Object[]{id}, Locale.US));
-        }*/
-//        User userUpdate = new User();
 
         if (dto.getPassword() != null && user.getPassword() != dto.getPassword()) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -222,6 +209,16 @@ public class ContentCreatorServiceImpl implements IContentCreator {
                     messageSource.getMessage("content-creator-not-found", new Object[]{idContentCreator}, Locale.US));
         }
         return mapper.map(ipContentCreatorForEdition, ContentCreatorResponseForEditionDTO.class);
+    }
+
+    public List<ContentCreatorBasicDTO> getByFilters(String name, Integer idTag) {
+        ContentCreatorFilters filtersDTO =new ContentCreatorFilters(name, idTag);
+        if(creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll(creatorSPecification.getByFilters(filtersDTO))).isEmpty()) {
+            return creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll());
+        } else {
+            return creatorMapperAux.creatorList2DTOBasicList(creatorRepository.findAll(creatorSPecification.getByFilters(filtersDTO)));
+        }
+
     }
 
 }

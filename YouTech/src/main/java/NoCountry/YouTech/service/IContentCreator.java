@@ -2,6 +2,7 @@ package NoCountry.YouTech.service;
 
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
+import NoCountry.YouTech.dto.contentCreator.ContentCreatorBasicDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
@@ -27,4 +28,5 @@ public interface IContentCreator {
     List<ContentCreatorResponseDTO> findContentCreators(String name, int[] tags);
 
     ContentCreatorResponseForEditionDTO getForEdition(Integer idContentCreator);
+    List<ContentCreatorBasicDTO> getByFilters(String name, Integer idTag);
 }

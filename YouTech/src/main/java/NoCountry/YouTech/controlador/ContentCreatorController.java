@@ -1,6 +1,7 @@
 package NoCountry.YouTech.controlador;
 
 import NoCountry.YouTech.dto.broadcastMedium.BroadcastMediumRequestDTO;
+import NoCountry.YouTech.dto.contentCreator.ContentCreatorBasicDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreator2UpdateDTO;
 import NoCountry.YouTech.dto.contentCreator.ContentCreatorResponseForEditionDTO;
@@ -48,5 +49,13 @@ public class ContentCreatorController {
         String name = body.get("name");
         return ResponseEntity.status(OK).body(service.findContentCreators(name, null));
     }
+
+    @GetMapping
+    public ResponseEntity<List<ContentCreatorBasicDTO>> getDetailsByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer idTag) {
+        return ResponseEntity.ok(this.service.getByFilters(name, idTag));
+    }
+
 
 }
